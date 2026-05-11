@@ -38,3 +38,4 @@
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/blazor_orderbook_simulation.pdb
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/blazor_orderbook_simulation.genruntimeconfig.cache
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/ref/blazor_orderbook_simulation.dll
+/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/blazor_orderbook_simulation.sourcelink.json

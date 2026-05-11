@@ -1,13 +1,80 @@
 ﻿@page "/"
 @rendermode InteractiveServer
-@inject OrderBook book
+@inject OrderBook OrderBook
 
 <PageTitle>Main</PageTitle>
 
 <h1>ORDERBOOK-SIMULATION</h1>
+<p>
+    a Blazor-Server App that simulates the dynamics of an orderbook on the server
+    and renders them as a dynamic graph in the clients browser.
+</p>
+
+<hr/>
+<button @onclick="limit_order_sell">place limit-order to sell</button>
+<button @onclick="limit_order_buy">place limit-order to buy</button>
+
+
+<div>
+@if(book is not null)
+{
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>AMOUNT</th>
+            <th>PRICE</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach(var ask in book.ASKS.TakeLast(10))
+            {
+                <tr>
+                    <td>@ask.order_id</td>
+                    <td>@ask.quantity</td>
+                    <td>@ask.price</td>
+               </tr>
+            }
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>AMOUNT</th>
+            <th>PRICE</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach(var ask in book.BIDS.TakeLast(10))
+            {
+                <tr>
+                    <td>@ask.order_id</td>
+                    <td>@ask.quantity</td>
+                    <td>@ask.price</td>
+               </tr>
+            }
+        </tbody>
+    </table>
+}
+</div>
+
+
+
 
 
 @code
 {
+    OrderBook? book {get;set;}
+    protected override void OnInitialized()
+    {
+        book = new OrderBook();
+    }
+
+    public void limit_order_sell()
+    {
+        if(book is not null)
+            book.place_limit_order(Side.sell, 10m,100m);
+    }
     
 }

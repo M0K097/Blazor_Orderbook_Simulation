@@ -3,7 +3,7 @@ using blazor_orderbook_simulation.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<OrderBook>();
+builder.Services.AddScoped<OrderBook>();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
