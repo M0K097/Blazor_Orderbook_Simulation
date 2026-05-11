@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zPZe1O45S/s=",
+  "success": true,
+  "projectFilePath": "/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/blazor_orderbook_simulation.csproj",
+  "expectedPackageFiles": [
+    "/home/m0k0/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.7/microsoft.aspnetcore.app.internal.assets.10.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
