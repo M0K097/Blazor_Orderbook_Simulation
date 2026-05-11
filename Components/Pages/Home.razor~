@@ -11,54 +11,15 @@
 </p>
 
 <hr/>
+
 <button @onclick="limit_order_sell">place limit-order to sell</button>
 <button @onclick="limit_order_buy">place limit-order to buy</button>
 
-
-<div>
-@if(book is not null)
+@if(book != null &&  book.ASKS != null && book.BIDS != null)
 {
-    <table>
-        <thead>
-            <tr>
-            <th>ID</th>
-            <th>AMOUNT</th>
-            <th>PRICE</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach(var ask in book.ASKS.TakeLast(10))
-            {
-                <tr>
-                    <td>@ask.order_id</td>
-                    <td>@ask.quantity</td>
-                    <td>@ask.price</td>
-               </tr>
-            }
-        </tbody>
-    </table>
-    <table>
-        <thead>
-            <tr>
-            <th>ID</th>
-            <th>AMOUNT</th>
-            <th>PRICE</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach(var ask in book.BIDS.TakeLast(10))
-            {
-                <tr>
-                    <td>@ask.order_id</td>
-                    <td>@ask.quantity</td>
-                    <td>@ask.price</td>
-               </tr>
-            }
-        </tbody>
-    </table>
+    <OrderTable orders="@book.ASKS" />
+    <OrderTable orders="@book.BIDS" />
 }
-</div>
-
 
 
 
@@ -76,5 +37,11 @@
         if(book is not null)
             book.place_limit_order(Side.sell, 10m,100m);
     }
+    public void limit_order_buy()
+    {
+        if(book is not null)
+            book.place_limit_order(Side.buy,10m,100m);
+    }
+
     
 }
