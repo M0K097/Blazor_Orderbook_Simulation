@@ -71,8 +71,7 @@
     public EventCallback<OrderInput> when_create_order {get;set;}
 
     private OrderInput model = new();
-    private bool placed = false;
-
+    public bool placed = false;
    
     public async Task create_new_order()
     {

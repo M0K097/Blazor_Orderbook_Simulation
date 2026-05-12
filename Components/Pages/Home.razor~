@@ -48,9 +48,9 @@
     {
         var i = input;
         if(i.Type == OrderType.Limit)
-        {
             book.place_limit_order(i.side,i.Quantity,i.Price);
-        }
+        else if(i.Type == OrderType.Market)
+            book.place_market_order(i.side,i.Quantity);
     }
 
 }
