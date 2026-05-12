@@ -12,7 +12,7 @@
 
 <hr/>
 
-<OrderInputFields/>
+<OrderInputFields when_create_order="handle_create_order"/>
 
 <div style="display:flex" >
     <div>
@@ -43,5 +43,14 @@
             await pricechart!.add_datapoint(last_trade.execution_price);
         }
     }
-    
+
+    public void handle_create_order(OrderInput input)
+    {
+        var i = input;
+        if(i.Type == OrderType.Limit)
+        {
+            book.place_limit_order(i.side,i.Quantity,i.Price);
+        }
+    }
+
 }

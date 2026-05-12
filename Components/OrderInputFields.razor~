@@ -1,0 +1,82 @@
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="model" OnValidSubmit="create_new_order">
+
+    <DataAnnotationsValidator />
+
+    <InputRadioGroup @bind-Value="model.side">
+        <div>
+        <label>
+            <InputRadio Value="Side.buy" />
+            BUY
+        </label>
+    </div>
+    <div>
+        <label>
+            <InputRadio Value="Side.sell" />
+            SELL
+        </label>
+    </div>
+    </InputRadioGroup>
+
+
+    <InputRadioGroup @bind-Value="model.Type">
+        <div>
+        <label>
+            <InputRadio Value="OrderType.Limit" />
+            Limit
+        </label>
+    </div>
+    <div>
+        <label>
+            <InputRadio Value="OrderType.Market" />
+            Market
+        </label>
+    </div>
+    </InputRadioGroup>
+
+    @if(model.Type == OrderType.Limit)
+    {
+        <div>
+            <label>Price</label>
+            <InputNumber @bind-Value="model.Price"/>
+            <ValidationMessage For="@(() => model.Price)"/>
+        </div>
+    }
+
+    <div>
+    <label>Amount</label>
+    <InputNumber @bind-Value="model.Quantity"/>
+    <ValidationMessage For="@(() => model.Quantity)"/>
+</div>
+
+<button>place order</button>
+
+</EditForm>
+
+@if(placed)
+{
+    <p> created @model.Type @model.side Order </p>
+    <p> Quantity: @model.Quantity </p>
+    @if(model.Type == OrderType.Limit)
+    {
+        <p> Price: @model.Price </p>
+    }
+}
+<hr/>
+
+@code
+{
+    [Parameter]
+    public EventCallback<OrderInput> when_create_order {get;set;}
+
+    private OrderInput model = new();
+    private bool placed = false;
+
+   
+    public async Task create_new_order()
+    {
+        placed = true;
+        await when_create_order.InvokeAsync(model);
+    }
+}

@@ -1,0 +1,34 @@
+@if(executions is not null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TAKER</th>
+                <th>MAKER</th>
+                <th>QUANTITY</th>
+                <th>PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var e in executions.TakeLast(10))
+            {
+                <tr>
+                    <td>@e.log_id</td>
+                    <td>@e.taker_id</td>
+                    <td>@e.maker_id</td>
+                    <td>@e.quantity</td>
+                    <td>@e.execution_price</td>
+               </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    [Parameter]
+    public List<Tradelog> executions {get;set;} = new List<Tradelog>();
+}
+
+

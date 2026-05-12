@@ -65,3 +65,4 @@ public class MarketOrder : Order
 {
     public MarketOrder(Side side, decimal quantity) : base(side, quantity){}
 }
+

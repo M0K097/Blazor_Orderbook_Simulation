@@ -1,0 +1,20 @@
+using System.ComponentModel.DataAnnotations;
+public enum OrderType
+{
+    Limit,
+    Market
+}
+public class OrderInput
+{
+    public OrderType Type {get;set;}
+    public Side side {get;set;}
+
+    [Required]
+    [Range(1,999)]
+    public decimal Price {get;set;}
+
+    [Required]
+    [Range(1,999)]
+    public decimal Quantity {get;set;}
+}
+
