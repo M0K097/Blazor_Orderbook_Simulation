@@ -14,7 +14,6 @@
 
 <button @onclick="limit_order_sell">place limit-order to sell</button>
 <button @onclick="limit_order_buy">place limit-order to buy</button>
-<button @onclick="test">test</button>
 
 <div style="display:flex" >
     <div>
@@ -31,10 +30,10 @@
 
     protected override void OnInitialized()
     {
-        book.trade_happened += test;
+        book.trade_happened += update_graph;
     }
 
-    public async void test()
+    public async void update_graph()
     {
         if(book.trade_log.Count > 0)
         {
