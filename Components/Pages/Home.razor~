@@ -12,8 +12,7 @@
 
 <hr/>
 
-<button @onclick="limit_order_sell">place limit-order to sell</button>
-<button @onclick="limit_order_buy">place limit-order to buy</button>
+<OrderInputFields/>
 
 <div style="display:flex" >
     <div>
@@ -43,15 +42,6 @@
             var last_trade = book.trade_log.Last();
             await pricechart!.add_datapoint(last_trade.execution_price);
         }
-    }
-
-    public void limit_order_sell()
-    {
-            book.place_limit_order(Side.sell, 10m,100m);
-    }
-    public void limit_order_buy()
-    {
-            book.place_limit_order(Side.buy,10m,100m);
     }
     
 }
