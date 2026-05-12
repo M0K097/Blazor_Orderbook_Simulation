@@ -26,6 +26,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/ExecutionTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FeGVjdXRpb25UYWJsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/OrderTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9PcmRlclRhYmxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

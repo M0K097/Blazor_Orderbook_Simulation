@@ -23,6 +23,9 @@
     <PriceChart @ref="pricechart"/>
 </div>
 
+<hr/>
+<ExecutionTable executions="@book.trade_log"/>
+
 @code
 {
     OrderBook book {get;set;} = new OrderBook();
