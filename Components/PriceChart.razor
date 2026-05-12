@@ -1,0 +1,25 @@
+@rendermode InteractiveServer
+@using ApexCharts
+
+<div>
+    <ApexChart TItem="Tradelog"
+               Title="Price Chart" 
+               Width="600"
+               Height="600" >
+
+        <ApexPointSeries TItem="Tradelog"
+                         Items="Data"
+                         Name="Price"
+                         SeriesType="SeriesType.Line"
+                         XValue="e => e.log_id"
+                         YValue="e => e.execution_price" />
+
+    </ApexChart>
+</div>
+    
+@code {
+
+    [Parameter]
+    public List<Tradelog>? Data { get; set; }
+    
+}

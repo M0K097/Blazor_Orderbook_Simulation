@@ -14,19 +14,25 @@
 
 <button @onclick="limit_order_sell">place limit-order to sell</button>
 <button @onclick="limit_order_buy">place limit-order to buy</button>
+<button @onclick="test">test</button>
 
+<div style="display:flex" >
 @if(book != null &&  book.ASKS != null && book.BIDS != null)
 {
-    <OrderTable orders="@book.ASKS" />
-    <OrderTable orders="@book.BIDS" />
+    <div>
+        <OrderTable orders="@book.ASKS" />
+        <OrderTable orders="@book.BIDS" />
+    </div>
 }
-
-
-
+<PriceChart/>
+</div>
 
 @code
 {
     OrderBook? book {get;set;}
+    List<Tradelog>? trade_data {get;set;} 
+    private ElementReference chart;
+
     protected override void OnInitialized()
     {
         book = new OrderBook();
@@ -42,6 +48,5 @@
         if(book is not null)
             book.place_limit_order(Side.buy,10m,100m);
     }
-
     
 }
