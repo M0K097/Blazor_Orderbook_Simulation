@@ -5,6 +5,8 @@ public class OrderBook
     public List<LimitOrder> ASKS { get; private set; } = new List<LimitOrder>();
     public List<Tradelog> trade_log = new List<Tradelog>();
 
+    public event Action? trade_happened;
+
     public void place_limit_order(Side order_side, decimal quantity, decimal price)
     {
         var new_order = new LimitOrder(order_side, quantity, price);
@@ -53,6 +55,7 @@ public class OrderBook
         var log = new Tradelog(o1.order_id, o2.order_id, qty,o2.price);
         log.print();
         trade_log.Add(log);
+        trade_happened?.Invoke();
     }
 
     public void insert_ask(LimitOrder order)

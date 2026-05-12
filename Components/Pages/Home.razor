@@ -21,7 +21,7 @@
         <OrderTable orders="@book.ASKS" />
         <OrderTable orders="@book.BIDS" />
     </div>
-<PriceChart @ref="pricechart"/>
+    <PriceChart @ref="pricechart"/>
 </div>
 
 @code
@@ -29,9 +29,18 @@
     OrderBook book {get;set;} = new OrderBook();
     private PriceChart? pricechart;
 
-    public async Task test()
+    protected override void OnInitialized()
     {
-        await pricechart!.add();
+        book.trade_happened += test;
+    }
+
+    public async void test()
+    {
+        if(book.trade_log.Count > 0)
+        {
+            var last_trade = book.trade_log.Last();
+            await pricechart!.add_datapoint(last_trade.execution_price);
+        }
     }
 
     public void limit_order_sell()

@@ -22,23 +22,27 @@
 
     [Parameter]
     public List<PriceData> Data { get; set; } = new(); 
-    int c = 0;
-    decimal p = 0;
-
     private ApexChart<PriceData>? chart; 
+    private int time_counter = 0;
 
-    public async Task add()
+    public async Task add_datapoint(decimal price_value)
     {
-        Data.Add(new PriceData{price=p,time=c});
-        c++;
-        p += 10;
+        var datapoint = new PriceData(price_value,time_counter);
         if(chart != null)
             await chart.UpdateSeriesAsync();
+
+        time_counter++;
     }
 
     public class PriceData
     {
         public decimal price {get;set;}
         public int time {get;set;}
+
+        public PriceData(decimal price, int time)
+        {
+            this.price = price;
+            this.time = time;
+        }
     }
 }
