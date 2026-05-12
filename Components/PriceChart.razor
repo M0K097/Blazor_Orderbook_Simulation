@@ -2,17 +2,18 @@
 @using ApexCharts
 
 <div>
-    <ApexChart TItem="Tradelog"
+    <ApexChart TItem="PriceData"
                Title="Price Chart" 
+               @ref="chart"
                Width="600"
                Height="600" >
 
-        <ApexPointSeries TItem="Tradelog"
+        <ApexPointSeries TItem="PriceData"
                          Items="Data"
                          Name="Price"
                          SeriesType="SeriesType.Line"
-                         XValue="e => e.log_id"
-                         YValue="e => e.execution_price" />
+                         XValue="e => e.time"
+                         YValue="e => e.price" />
 
     </ApexChart>
 </div>
@@ -20,6 +21,24 @@
 @code {
 
     [Parameter]
-    public List<Tradelog>? Data { get; set; }
-    
+    public List<PriceData> Data { get; set; } = new(); 
+    int c = 0;
+    decimal p = 0;
+
+    private ApexChart<PriceData>? chart; 
+
+    public async Task add()
+    {
+        Data.Add(new PriceData{price=p,time=c});
+        c++;
+        p += 10;
+        if(chart != null)
+            await chart.UpdateSeriesAsync();
+    }
+
+    public class PriceData
+    {
+        public decimal price {get;set;}
+        public int time {get;set;}
+    }
 }

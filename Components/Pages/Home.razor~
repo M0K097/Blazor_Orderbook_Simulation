@@ -17,46 +17,29 @@
 <button @onclick="test">test</button>
 
 <div style="display:flex" >
-@if(book != null &&  book.ASKS != null && book.BIDS != null)
-{
     <div>
         <OrderTable orders="@book.ASKS" />
         <OrderTable orders="@book.BIDS" />
     </div>
-}
-<PriceChart  @ref="chart" Data="@trade_data"/>
+<PriceChart @ref="pricechart"/>
 </div>
 
 @code
 {
-    OrderBook? book {get;set;}
-    List<Tradelog>? trade_data {get;set;} 
-    private ElementReference chart;
+    OrderBook book {get;set;} = new OrderBook();
+    private PriceChart? pricechart;
 
-    protected override void OnInitialized()
+    public async Task test()
     {
-        book = new OrderBook();
-        var t = new Tradelog(1,2,10,10);
-        var l = new List<Tradelog>();
-        l.Add(t);
-        trade_data = l;
-    }
-
-    public void test()
-    {
-        var t = new Tradelog(1,2,10,10);
-        if(trade_data != null)
-        trade_data.Add(t);
+        await pricechart!.add();
     }
 
     public void limit_order_sell()
     {
-        if(book is not null)
             book.place_limit_order(Side.sell, 10m,100m);
     }
     public void limit_order_buy()
     {
-        if(book is not null)
             book.place_limit_order(Side.buy,10m,100m);
     }
     
