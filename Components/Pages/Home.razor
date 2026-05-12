@@ -16,7 +16,7 @@
 
 <div style="display:flex" >
     <div>
-        <OrderTable orders="@book.ASKS" />
+        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" />
         <OrderTable orders="@book.BIDS" />
     </div>
     <PriceChart @ref="pricechart"/>

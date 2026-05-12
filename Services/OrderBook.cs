@@ -9,11 +9,48 @@ public class OrderBook
 
     public void place_limit_order(Side order_side, decimal quantity, decimal price)
     {
-        var new_order = new LimitOrder(order_side, quantity, price);
-        if (new_order.order_side == Side.buy)
-            match_limit_order_buy(new_order);
+        var new_limit_order = new LimitOrder(order_side, quantity, price);
+        if (new_limit_order.order_side == Side.buy)
+            match_limit_order_buy(new_limit_order);
         else
-            match_limit_order_sell(new_order);
+            match_limit_order_sell(new_limit_order);
+    }
+
+    public void place_market_order(Side order_side, decimal quantity)
+    {
+        var new_market_order = new MarketOrder(order_side, quantity);
+        if (new_market_order.order_side == Side.buy)
+            match_market_order_buy(new_market_order);
+        else
+            match_market_order_sell(new_market_order);
+    }
+
+    public void match_market_order_sell(MarketOrder order)
+    {
+        while (order.status != Status.filled && BIDS.Count > 0)
+        {
+            var best_bid = BIDS[0];
+            trade(order, best_bid);
+            if (best_bid.status == Status.filled)
+                BIDS.RemoveAt(0);
+        }
+        if(order.status != Status.filled)
+            order.cancel_order();
+    }
+
+    public void match_market_order_buy(MarketOrder order)
+    {
+        while (order.status != Status.filled && ASKS.Count > 0)
+        {
+            var best_sell = ASKS[0];
+
+            trade(order, best_sell);
+
+            if (best_sell.status == Status.filled)
+                ASKS.RemoveAt(0);
+        }
+        if(order.status != Status.filled)
+            order.cancel_order();
     }
 
     public void match_limit_order_sell(LimitOrder order)
@@ -26,7 +63,7 @@ public class OrderBook
                 break;
             trade(order, best_bid);
             if (best_bid.status == Status.filled)
-                BIDS.Remove(best_bid);
+                BIDS.RemoveAt(0);
         }
         if (order.status != Status.filled)
             insert_ask(order);
@@ -41,7 +78,7 @@ public class OrderBook
                 break;
             trade(order, best_sell);
             if (best_sell.status == Status.filled)
-                ASKS.Remove(best_sell);
+                ASKS.RemoveAt(0);
         }
         if (order.status != Status.filled)
             insert_bid(order);
@@ -61,7 +98,7 @@ public class OrderBook
     public void insert_ask(LimitOrder order)
     {
         var i = 0;
-        while (ASKS.Count > 0 && i < ASKS.Count && (ASKS[i].price < order.price ||
+        while (i < ASKS.Count && (ASKS[i].price < order.price ||
                 ASKS[i].price == order.price && ASKS[i].order_id <= order.order_id))
         {
             i++;
@@ -72,7 +109,7 @@ public class OrderBook
     public void insert_bid(LimitOrder order)
     {
         var i = 0;
-        while (BIDS.Count > 0 && i < BIDS.Count && (BIDS[i].price > order.price ||
+        while (i < BIDS.Count && (BIDS[i].price > order.price ||
                 BIDS[i].price == order.price && BIDS[i].order_id <= order.order_id))
         {
             i++;
