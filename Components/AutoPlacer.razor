@@ -83,7 +83,7 @@ else
         input.Quantity = Min + (decimal)random.NextDouble() * (MaxAmount - Min);
         input.Type = OrderType.Limit;
         var side_chance = random.Next(0,100);
-        if(side_chance > Optimism * 100)
+        if(side_chance < Optimism * 100)
             input.side = Side.buy;
         else
             input.side = Side.sell;
