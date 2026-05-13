@@ -43,3 +43,18 @@ h1:focus {
 .table-light-red tr td {
     background-color: #f8d7da;
 }
+.table-shadow {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #e0e0e0;
+    padding: 8px;
+}

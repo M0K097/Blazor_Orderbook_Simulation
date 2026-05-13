@@ -20,13 +20,20 @@
 
 <hr>
 
-<div style="display:flex" >
-    <div>
+<div style="display:flex; gap:20px; align-items:flex-start; width:100%;">
+
+    <div style="width:600px;">
+        <div style="max-height:600px; overflow-y:auto;">
         <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
         <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
-    </div>
-    <PriceChart @ref="pricechart"/>
+   </div>
+
 </div>
+    <div style="flex:1; min-width:0; height:600">
+    <PriceChart @ref="pricechart"/>
+    </div>
+</div>
+
 <hr/>
 
 <ExecutionTable executions="@book.trade_log"/>

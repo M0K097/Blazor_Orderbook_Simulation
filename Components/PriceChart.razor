@@ -1,12 +1,12 @@
 @rendermode InteractiveServer
 @using ApexCharts
 
-<div>
     <ApexChart TItem="PriceData"
-               Title="Price Chart" 
+               Title="Price" 
+               options="options"
                @ref="chart"
-               Width="600"
-               Height="600" >
+               Width="@("100%")"
+               Height="500" >
 
         <ApexPointSeries TItem="PriceData"
                          Items="Data"
@@ -16,7 +16,6 @@
                          YValue="e => e.price" />
 
     </ApexChart>
-</div>
     
 @code {
 
@@ -34,6 +33,37 @@
 
         time_counter++;
     }
+
+
+    private ApexCharts.ApexChartOptions<PriceData> options = new()
+    {
+    Chart = new ApexCharts.Chart
+    {
+        Animations = new ApexCharts.Animations
+        {
+            Enabled = false
+        },
+        Toolbar = new ApexCharts.Toolbar
+        {
+            Show = false
+        },
+    },
+
+    Stroke = new ApexCharts.Stroke
+    {
+        Curve = ApexCharts.Curve.Straight,
+        Width = 2
+    },
+    Tooltip = new ApexCharts.Tooltip
+    {
+        Enabled = false
+    },
+    Grid = new ApexCharts.Grid
+    {
+        BorderColor = "#e0e0e0"
+    }
+};
+ 
 
     public class PriceData
     {

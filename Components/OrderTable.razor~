@@ -28,5 +28,8 @@
 {
     [Parameter]
     public List<LimitOrder>? orders {get;set;}
+
+    [Parameter] 
+    public string CssClass { get; set; } = "";
 }
   
