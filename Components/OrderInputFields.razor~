@@ -72,11 +72,6 @@
 
     private OrderInput model = new();
     private bool placed = false;
-
    
-    public async Task create_new_order()
-    {
-        placed = true;
-        await when_create_order.InvokeAsync(model);
-    }
+    public async Task create_new_order() => await when_create_order.InvokeAsync(model);
 }

@@ -54,16 +54,6 @@
 
 </EditForm>
 
-@if(placed)
-{
-    <p> created @model.Type @model.side Order </p>
-    <p> Quantity: @model.Quantity </p>
-    @if(model.Type == OrderType.Limit)
-    {
-        <p> Price: @model.Price </p>
-    }
-}
-<hr/>
 
 @code
 {
@@ -71,11 +61,7 @@
     public EventCallback<OrderInput> when_create_order {get;set;}
 
     private OrderInput model = new();
-    public bool placed = false;
+    private bool placed = false;
    
-    public async Task create_new_order()
-    {
-        placed = true;
-        await when_create_order.InvokeAsync(model);
-    }
+    public async Task create_new_order() => await when_create_order.InvokeAsync(model);
 }
