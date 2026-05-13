@@ -1,7 +1,7 @@
 
 @if(orders is not null)
 {
-    <table>
+    <table class="@CssClass">
         <thead>
             <tr>
                 <th>ID</th>

@@ -35,11 +35,30 @@ h1:focus {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
-}
-.table-light-green tr td {
-    background-color: #d4edda;
+.table-light-green {
+    background-color: #d4edda; /* soft green */
+    border-collapse: collapse;
 }
 
-.table-light-red tr td {
-    background-color: #f8d7da;
+.table-light-green th {
+    background-color: #28a745;
+    color: white;
 }
+
+.table-light-green td {
+    padding: 8px;
+}
+
+.table-light-red {
+    background-color: #f8d7da; /* soft red */
+    border-collapse: collapse;
+}
+
+.table-light-red th {
+    background-color: #dc3545;
+    color: white;
+}
+
+.table-light-red td {
+    padding: 8px;
+}}

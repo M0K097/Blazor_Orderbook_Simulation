@@ -22,7 +22,6 @@
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/scopedcss/Components/Layout/ReconnectModal.razor.rz.scp.css
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/scopedcss/bundle/blazor_orderbook_simulation.styles.css
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/scopedcss/projectbundle/blazor_orderbook_simulation.bundle.scp.css
-/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/fthv2mh8lq-{0}-4kywy7iv6g-4kywy7iv6g.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/j92fa9weiv-{0}-abdmv1u4y3-abdmv1u4y3.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/s2wwdeny4g-{0}-hwaxidwiwj-hwaxidwiwj.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/x89gnudihe-{0}-xbbil6v7co-xbbil6v7co.gz
@@ -89,3 +88,4 @@
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/1j8oabzfj7-{0}-qz6clc5837-qz6clc5837.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/0g0tdqq8mx-{0}-ody88ncx6z-ody88ncx6z.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/blazor_o.E9555BB1.Up2Date
+/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/fthv2mh8lq-{0}-8zn30937tm-8zn30937tm.gz

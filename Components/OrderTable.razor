@@ -1,7 +1,7 @@
 
 @if(orders is not null)
 {
-    <table>
+    <table class="@CssClass">
         <thead>
             <tr>
                 <th>ID</th>
@@ -28,5 +28,8 @@
 {
     [Parameter]
     public List<LimitOrder>? orders {get;set;}
+
+    [Parameter] 
+    public string CssClass { get; set; } = "";
 }
   

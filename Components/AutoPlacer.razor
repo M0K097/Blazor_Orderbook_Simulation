@@ -49,18 +49,29 @@
         @bind:event="oninput"/>
 </div>
 
-<button @onclick="Start">test_start</button>
+@if(!IsRunning)
+{
+    <button @onclick="Start">START</button>
+}
+else
+{
+    <button @onclick="Stop">STOP</button>
+}
 
 @code
 {
     [Parameter]
     public EventCallback<OrderInput> on_auto_create {get;set;}
 
+    private bool IsRunning = false;
+
+    Worker? loop_worker {get;set;}
+
     public int Speed {get;set;} = 1000;
     public decimal MaxPrice {get;set;} = 100;
     public decimal MaxAmount {get;set;} = 100;
     public double Optimism {get;set;} = 0.5; 
-    public double Variance {get; set;} = 0.5;
+    public double Variance {get; set;} = 0.1;
     public decimal Min = 1;
 
     private Random random = new Random();
@@ -88,18 +99,19 @@
         Console.WriteLine(o.Price);
     } 
     
-    Worker? loop_worker {get;set;}
+    protected override void OnInitialized() => loop_worker = new Worker(for_worker);
 
-    protected override void OnInitialized()
+    public void Stop()
     {
-        loop_worker = new Worker(for_worker);
+        if(loop_worker != null)
+            loop_worker.Stop();
+            IsRunning = false;
     }
     
     public void Start()
     {
         if(loop_worker != null)
             loop_worker.Start();
+            IsRunning = true;
     }
-
-
 }

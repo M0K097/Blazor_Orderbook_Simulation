@@ -42,10 +42,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9PcmRlclRhYmxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/Pages/Chart.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DaGFydC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,17 +1,18 @@
 @using System.ComponentModel.DataAnnotations
 
+<h3> CREATE ORDER </h3>
+
 <EditForm Model="model" OnValidSubmit="create_new_order">
 
     <DataAnnotationsValidator />
 
     <InputRadioGroup @bind-Value="model.side">
         <div>
+        <label>SIDE:</label>
         <label>
             <InputRadio Value="Side.buy" />
             BUY
         </label>
-    </div>
-    <div>
         <label>
             <InputRadio Value="Side.sell" />
             SELL
@@ -21,38 +22,34 @@
 
     <InputRadioGroup @bind-Value="model.Type">
         <div>
+        <label>TYPE:</label>
         <label>
             <InputRadio Value="OrderType.Limit" />
             Limit
         </label>
-    </div>
-    <div>
         <label>
             <InputRadio Value="OrderType.Market" />
             Market
         </label>
     </div>
     </InputRadioGroup>
+    <div class="d-flex align-items-center">
+        <label>Amount</label>
+        <InputNumber @bind-Value="model.Quantity"/>
+        <ValidationMessage For="@(() => model.Quantity)"/>
 
     @if(model.Type == OrderType.Limit)
     {
-        <div>
             <label>Price</label>
             <InputNumber @bind-Value="model.Price"/>
             <ValidationMessage For="@(() => model.Price)"/>
-        </div>
     }
 
-    <div>
-    <label>Amount</label>
-    <InputNumber @bind-Value="model.Quantity"/>
-    <ValidationMessage For="@(() => model.Quantity)"/>
 </div>
 
-<button>place order</button>
+<button>CREATE</button>
 
 </EditForm>
-
 
 @code
 {

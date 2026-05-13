@@ -12,18 +12,19 @@
 
 <hr/>
 
-<OrderInputFields when_create_order="handle_create_order"/>
-
-<hr>
-
-<AutoPlacer/>
+<div style="display:flex; gap:20px;">
+    <OrderInputFields when_create_order="handle_create_order"/>
+    <div>
+    <AutoPlacer on_auto_create="handle_create_order"/>
+</div>
+</div>
 
 <hr>
 
 <div style="display:flex" >
     <div>
-        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" />
-        <OrderTable orders="@book.BIDS" />
+        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
+        <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
     </div>
     <PriceChart @ref="pricechart"/>
 </div>
