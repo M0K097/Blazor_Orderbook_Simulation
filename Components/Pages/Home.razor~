@@ -27,19 +27,18 @@
     </div>
     <PriceChart @ref="pricechart"/>
 </div>
-
 <hr/>
 
 <ExecutionTable executions="@book.trade_log"/>
 
-
 @code
 {
-    OrderBook book {get;set;} = new OrderBook();
+    OrderBook book {get;set;} = default!;
     private PriceChart? pricechart;
 
     protected override void OnInitialized()
     {
+        book = OrderBook;
         book.trade_happened += update_graph;
     }
 

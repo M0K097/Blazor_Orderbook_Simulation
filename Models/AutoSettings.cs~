@@ -1,7 +1,0 @@
-public class AutoSettings
-{
-    public int Speed {get;set;} = 1000;
-    public decimal MaxPrice {get;set;} = 100;
-    public decimal MaxAmount {get;set;} = 100;
-    public double Optimism {get;set;} = 0.5; 
-}

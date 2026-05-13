@@ -115,6 +115,5 @@ public class OrderBook
             i++;
         }
         BIDS.Insert(i, order);
-
     }
 }

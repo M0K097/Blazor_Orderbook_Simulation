@@ -1,10 +1,5 @@
 
 <h3>Automatic Order Generator</h3>
-<label>
-    <input type="checkbox"
-           @bind="IsRunning"/>
-    IsRunning
-</label>
 
 <label>Speed: @Speed</label>
 <div>
@@ -54,12 +49,44 @@
         @bind:event="oninput"/>
 </div>
 
+<button @onclick="Start">test_start</button>
+
 @code
 {
-    public bool IsRunning {get;set;} = false;
+    [Parameter]
+    public EventCallback<OrderInput> on_auto_create {get;set;}
+
     public int Speed {get;set;} = 1000;
     public decimal MaxPrice {get;set;} = 100;
     public decimal MaxAmount {get;set;} = 100;
     public double Optimism {get;set;} = 0.5; 
     public double Variance {get; set;} = 0.5;
+
+    public async Task for_worker()
+    {
+        OrderInput o = new();
+        o.Price = 100m;
+        o.Quantity = 100m;
+        o.Type = OrderType.Limit;
+        o.side = Side.buy;
+
+        await on_auto_create.InvokeAsync(o);
+        Console.WriteLine("test");
+        Console.WriteLine(o.price);
+    } 
+    
+    Worker? loop_worker {get;set;}
+
+    protected override void OnInitialized()
+    {
+        loop_worker = new Worker(for_worker);
+    }
+    
+    public void Start()
+    {
+        if(loop_worker != null)
+            loop_worker.Start();
+    }
+
+
 }

@@ -28,6 +28,7 @@
     public async Task add_datapoint(decimal price_value)
     {
         var datapoint = new PriceData(price_value,time_counter);
+        Data.Add(datapoint);
         if(chart != null)
             await chart.UpdateSeriesAsync();
 
