@@ -61,18 +61,31 @@
     public decimal MaxAmount {get;set;} = 100;
     public double Optimism {get;set;} = 0.5; 
     public double Variance {get; set;} = 0.5;
+    public decimal Min = 1;
+
+    private Random random = new Random();
+
+    public OrderInput make_input()
+    {
+        OrderInput input = new();
+        input.Price = Min + (decimal)random.NextDouble() * (MaxPrice - Min);
+        input.Quantity = Min + (decimal)random.NextDouble() * (MaxAmount - Min);
+        input.Type = OrderType.Limit;
+        var side_chance = random.Next(0,100);
+        if(side_chance > Optimism)
+            input.side = Side.buy;
+        else
+            input.side = Side.sell;
+
+        return input;
+    }
 
     public async Task for_worker()
     {
-        OrderInput o = new();
-        o.Price = 100m;
-        o.Quantity = 100m;
-        o.Type = OrderType.Limit;
-        o.side = Side.buy;
-
+        var o = make_input();
         await on_auto_create.InvokeAsync(o);
         Console.WriteLine("test");
-        Console.WriteLine(o.price);
+        Console.WriteLine(o.Price);
     } 
     
     Worker? loop_worker {get;set;}
