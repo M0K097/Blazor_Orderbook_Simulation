@@ -19,7 +19,6 @@
     </div>
     </InputRadioGroup>
 
-
     <InputRadioGroup @bind-Value="model.Type">
         <div>
         <label>
@@ -61,7 +60,6 @@
     public EventCallback<OrderInput> when_create_order {get;set;}
 
     private OrderInput model = new();
-    private bool placed = false;
-   
+
     public async Task create_new_order() => await when_create_order.InvokeAsync(model);
 }

@@ -54,16 +54,6 @@
 
 </EditForm>
 
-@if(placed)
-{
-    <p> created @model.Type @model.side Order </p>
-    <p> Quantity: @model.Quantity </p>
-    @if(model.Type == OrderType.Limit)
-    {
-        <p> Price: @model.Price </p>
-    }
-}
-<hr/>
 
 @code
 {
