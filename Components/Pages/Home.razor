@@ -14,6 +14,12 @@
 
 <OrderInputFields when_create_order="handle_create_order"/>
 
+<hr>
+
+<AutoPlacer/>
+
+<hr>
+
 <div style="display:flex" >
     <div>
         <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" />
@@ -25,6 +31,7 @@
 <hr/>
 
 <ExecutionTable executions="@book.trade_log"/>
+
 
 @code
 {

@@ -1,7 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @inject OrderBook OrderBook
-@inject AutoRunner Runner
 
 <PageTitle>Main</PageTitle>
 
@@ -15,7 +14,11 @@
 
 <OrderInputFields when_create_order="handle_create_order"/>
 
-<AutoRunnerControls Settings="settings" OnStart="Start" />
+<hr>
+
+<AutoPlacer/>
+
+<hr>
 
 <div style="display:flex" >
     <div>
@@ -26,13 +29,14 @@
 </div>
 
 <hr/>
+
 <ExecutionTable executions="@book.trade_log"/>
+
 
 @code
 {
     OrderBook book {get;set;} = new OrderBook();
     private PriceChart? pricechart;
-    private AutoRunnerSettings settings = new();
 
     protected override void OnInitialized()
     {
@@ -55,11 +59,6 @@
             book.place_limit_order(i.side,i.Quantity,i.Price);
         else if(i.Type == OrderType.Market)
             book.place_market_order(i.side,i.Quantity);
-    }
-
-    private async Task Start(AutoRunnerSettings s)
-    {
-        _ = Runner.StartAsync(s);
     }
 
 }
