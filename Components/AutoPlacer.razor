@@ -1,53 +1,50 @@
 
 <h3>Automatic Order Generator</h3>
 
-<label>Speed: @Speed</label>
-<div>
-<input type="range"
-        min="100"
-        max="5000"
-        @bind="Speed"
-        @bind:event="oninput"/>
-</div>
+
+<MudGrid>
+    <MudItem xs="6">
+        <MudSlider @bind-Value="@Speed" min="100" max="10000">Speed: @Speed.ToString()</MudSlider>
 
 <label>Maximal Price: @MaxPrice</label>
-<div>
+
     <input type="range"
             min="1"
             max="1000000"
             @bind="MaxPrice"
             @bind:event="oninput"/>
-</div>
+    </MudItem>
+    <MudItem xs="6">
 
 
 <label>Maximal Amount: @MaxAmount</label>
-<div>
 <input type="range"
         min="1"
         max="10000"
         @bind="MaxAmount"
         @bind:event="oninput"/>
-</div>
+
 
 <label>Optimism: @Optimism</label>
-<div>
+
 <input type="range"
         min="0"
         max="1"
         step="0.01"
         @bind="Optimism"
         @bind:event="oninput"/>
-</div>
+
+    </MudItem>
+
+    <MudItem xs="6">
 
 <label>Variance: @Variance</label>
-<div>
 <input type="range"
         min="0"
         max="1"
         step="0.01"
         @bind="Variance"
         @bind:event="oninput"/>
-</div>
 
 @if(!IsRunning)
 {
@@ -57,6 +54,9 @@ else
 {
     <button @onclick="Stop">STOP</button>
 }
+    </MudItem>
+
+</MudGrid>
 
 @code
 {
@@ -67,7 +67,7 @@ else
 
     Worker? loop_worker {get;set;}
 
-    public int Speed {get;set;} = 1000;
+    public int Speed = 1000;
     public decimal MaxPrice {get;set;} = 100;
     public decimal MaxAmount {get;set;} = 100;
     public double Optimism {get;set;} = 0.5; 

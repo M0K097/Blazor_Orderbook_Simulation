@@ -4,9 +4,10 @@
 @rendermode InteractiveServer
 
 <MudGrid>
-    <MudItem xs="12">
-        <MudPaper Class="pa-4" Style="width:100%;">
+    <MudItem xs="6">
+        <MudPaper Class="pa-4" Style="width:100%; height:400px;">
         <MudStack>
+
 
             <MudText Typo="Typo.h5">
                 CREATE ORDERS
@@ -32,25 +33,27 @@
             {
                 <AutoPlacer on_auto_create="handle_create_order"/>
             }
-
-
-
         </MudStack>
 
-           </MudPaper>
+    </MudPaper>
     </MudItem>
 
 
+    <MudItem xs="6">
+    <MudPaper Style="width:100%; height:400px; overflow:auto;">
+          <MudText Typo="Typo.h5">
+                ORDERBOOK
+            </MudText>
+        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
+        <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
+    </MudPaper>
+    </MudItem>
 
-
-
-
-
-
-
-
-
-
+    <MudItem xs="12">
+    <MudPaper Class="pa-4" Style="width:100%;">
+          <PriceChart @ref="pricechart"/>
+    </MudPaper>
+    </MudItem>
 </MudGrid>
 
 
@@ -70,5 +73,21 @@
         else if(i.Type == OrderType.Market)
             book.place_market_order(i.side,i.Quantity);
     }
+
+        protected override void OnInitialized()
+    {
+
+        book.trade_happened += update_graph;
+    }
+
+    public async void update_graph()
+    {
+        if(book.trade_log.Count > 0)
+        {
+            var last_trade = book.trade_log.Last();
+            await pricechart!.add_datapoint(last_trade.execution_price);
+        }
+    }
+
 
 }
