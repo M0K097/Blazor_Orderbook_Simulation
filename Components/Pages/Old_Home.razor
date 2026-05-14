@@ -1,0 +1,69 @@
+﻿@rendermode InteractiveServer
+@inject OrderBook OrderBook
+
+<PageTitle>Main</PageTitle>
+
+<h1>ORDERBOOK-SIMULATION</h1>
+<p>
+    a Blazor-Server App that simulates the dynamics of an orderbook on the server
+    and renders them as a dynamic graph in the clients browser.
+</p>
+
+<hr/>
+
+<OrderInputFields when_create_order="handle_create_order"/>
+
+<hr>
+
+<AutoPlacer on_auto_create="handle_create_order"/>
+
+<hr>
+
+<div style="display:flex; gap:20px; align-items:flex-start; width:100%;">
+
+    <div style="width:600px;">
+        <div style="max-height:600px; overflow-y:auto;">
+        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
+        <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
+   </div>
+
+</div>
+    <div style="flex:1; min-width:0; height:600">
+    <PriceChart @ref="pricechart"/>
+    </div>
+</div>
+
+<hr/>
+
+<ExecutionTable executions="@book.trade_log"/>
+
+@code
+{
+    OrderBook book {get;set;} = default!;
+    private PriceChart? pricechart;
+
+    protected override void OnInitialized()
+    {
+        book = OrderBook;
+        book.trade_happened += update_graph;
+    }
+
+    public async void update_graph()
+    {
+        if(book.trade_log.Count > 0)
+        {
+            var last_trade = book.trade_log.Last();
+            await pricechart!.add_datapoint(last_trade.execution_price);
+        }
+    }
+
+    public void handle_create_order(OrderInput input)
+    {
+        var i = input;
+        if(i.Type == OrderType.Limit)
+            book.place_limit_order(i.side,i.Quantity,i.Price);
+        else if(i.Type == OrderType.Market)
+            book.place_market_order(i.side,i.Quantity);
+    }
+
+}
