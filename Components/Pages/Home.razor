@@ -13,9 +13,6 @@
                 CREATE ORDERS
             </MudText>
 
-            <MudDivider Class="my-2" />
-
-
             <MudText>Mode: @_mode</MudText>
 
             <MudToggleGroup T="string" SelectionMode="SelectionMode.SingleSelection" @bind-Value="_mode" Color="Color.Primary" CheckMark FixedContent>
@@ -52,6 +49,12 @@
     <MudItem xs="12">
     <MudPaper Class="pa-4" Style="width:100%;">
           <PriceChart @ref="pricechart"/>
+    </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12">
+    <MudPaper Class="pa-4" Style="width:100%;">
+          <ExecutionTable executions="@book.trade_log"/>
     </MudPaper>
     </MudItem>
 </MudGrid>
