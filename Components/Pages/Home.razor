@@ -1,27 +1,31 @@
 @page "/"
-@rendermode InteractiveServer
 @inherits LayoutComponentBase
+@inject OrderBook OrderBook
+@rendermode InteractiveServer
 
 
 
-<MudLayout>
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <h2> Orderbook Simulation </h2>
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
-        <NavMenu/>
-    </MudDrawer>
-    <MudMainContent>
-        @Body
-    </MudMainContent>
-</MudLayout>
+
+
+        <OrderInputFields when_create_order="handle_create_order"/>
+
+
+
+
 
 @code {
-    bool _drawerOpen = false;
 
-    void DrawerToggle()
+    OrderBook book {get;set;} = default!;
+    private PriceChart? pricechart;
+
+
+    public void handle_create_order(OrderInput input)
     {
-        _drawerOpen = !_drawerOpen;
+        var i = input;
+        if(i.Type == OrderType.Limit)
+            book.place_limit_order(i.side,i.Quantity,i.Price);
+        else if(i.Type == OrderType.Market)
+            book.place_market_order(i.side,i.Quantity);
     }
+
 }

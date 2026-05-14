@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "XuI0Com4DjI=",
+  "dgSpecHash": "RP90hjMceQo=",
   "success": true,
   "projectFilePath": "/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/blazor_orderbook_simulation.csproj",
   "expectedPackageFiles": [
     "/home/m0k0/.nuget/packages/blazor-apexcharts/6.1.0/blazor-apexcharts.6.1.0.nupkg.sha512",
-    "/home/m0k0/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.7/microsoft.aspnetcore.app.internal.assets.10.0.7.nupkg.sha512"
+    "/home/m0k0/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.7/microsoft.aspnetcore.app.internal.assets.10.0.7.nupkg.sha512",
+    "/home/m0k0/.nuget/packages/mudblazor/9.4.0/mudblazor.9.4.0.nupkg.sha512"
   ],
   "logs": []
 }

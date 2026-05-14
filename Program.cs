@@ -1,9 +1,11 @@
 using ApexCharts;
+using MudBlazor.Services;
 using blazor_orderbook_simulation.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMudServices();
 builder.Services.AddSingleton<OrderBook>();
 builder.Services.AddApexCharts();
 builder.Services.AddRazorComponents()

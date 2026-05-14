@@ -1,28 +1,10 @@
 @page "/Docs"
-@rendermode InteractiveServer
 @inherits LayoutComponentBase
+@rendermode InteractiveServer
 
-<MudLayout>
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <h2> Documentation </h2>
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen">
-        <NavMenu/>
-    </MudDrawer>
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Medium">
-            <p> Nothing Here YET </p>
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
 
-@code {
-    bool _drawerOpen = true;
+            <p>   a Blazor-Server App that simulates the dynamics of an orderbook on the server
+    and renders them as a dynamic graph in the clients browser. </p>
 
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-}
+
 
