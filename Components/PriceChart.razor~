@@ -41,26 +41,16 @@
     {
         Animations = new ApexCharts.Animations
         {
-            Enabled = false
-        }
-    },
-
-    Stroke = new ApexCharts.Stroke
-    {
-        Curve = ApexCharts.Curve.Straight,
-        Width = 2
+            Enabled = true;
+        },
+        Toolbar = new ApexCharts.Toolbar
+        {
+            Show = true;
+        },
     },
     Tooltip = new ApexCharts.Tooltip
     {
-        Enabled = false
-    },
-    Grid = new ApexCharts.Grid
-    {
-        BorderColor = "#e0e0e0"
-    },
-     Toolbar = new ApexCharts.Toolbar
-    {
-        Show = false
+        Enabled = true;
     }
 };
  
