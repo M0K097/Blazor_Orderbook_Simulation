@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("blazor_orderbook_simulation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2999754395f44350d6420d1f18c9565da9b6a2f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1614770514fc52dbf668f151daa3b6e257356c7b")]
 [assembly: System.Reflection.AssemblyProductAttribute("blazor_orderbook_simulation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("blazor_orderbook_simulation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
