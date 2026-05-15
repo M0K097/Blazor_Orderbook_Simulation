@@ -1,55 +1,18 @@
-@using System.ComponentModel.DataAnnotations
-
 <h3> CREATE ORDER </h3>
 
-<EditForm Model="model" OnValidSubmit="create_new_order">
+    <MudToggleGroup T="OrderType" SelectionMode="SelectionMode.SingleSelection" @bind-Value="model.Type" Color="Color.Primary" CheckMark FixedContent>
+        <MudToggleItem Value="@(OrderType.Limit)" Text="LIMIT" />
+        <MudToggleItem Value="@(OrderType.Market)" Text="MARKET" />
+    </MudToggleGroup>
 
-    <DataAnnotationsValidator />
-
-    <InputRadioGroup @bind-Value="model.side">
-        <div>
-        <label>SIDE:</label>
-        <label>
-            <InputRadio Value="Side.buy" />
-            BUY
-        </label>
-        <label>
-            <InputRadio Value="Side.sell" />
-            SELL
-        </label>
-    </div>
-    </InputRadioGroup>
-
-    <InputRadioGroup @bind-Value="model.Type">
-        <div>
-        <label>TYPE:</label>
-        <label>
-            <InputRadio Value="OrderType.Limit" />
-            Limit
-        </label>
-        <label>
-            <InputRadio Value="OrderType.Market" />
-            Market
-        </label>
-    </div>
-    </InputRadioGroup>
-    <div class="d-flex align-items-center">
-        <label>Amount</label>
-        <InputNumber @bind-Value="model.Quantity"/>
-        <ValidationMessage For="@(() => model.Quantity)"/>
-
+    <MudTextField @bind-Value="model.Quantity" Label="Quantity" Variant="Variant.Outlined"></MudTextField>
     @if(model.Type == OrderType.Limit)
     {
-            <label>Price</label>
-            <InputNumber @bind-Value="model.Price"/>
-            <ValidationMessage For="@(() => model.Price)"/>
+        <MudTextField @bind-Value="model.Price" Label="Price" Variant="Variant.Outlined"></MudTextField>
     }
+    <MudButton Variant="Variant.Filled" OnClick="create_new_buy_order" Size="Size.Large" Color="Color.Primary">BUY</MudButton>
+    <MudButton Variant="Variant.Filled" OnClick="create_new_sell_order" Size="Size.Large" Color="Color.Secondary">SELL</MudButton>
 
-</div>
-
-<button>CREATE</button>
-
-</EditForm>
 
 @code
 {
@@ -58,5 +21,15 @@
 
     private OrderInput model = new();
 
-    public async Task create_new_order() => await when_create_order.InvokeAsync(model);
+    public async Task create_new_buy_order() 
+    {
+        model.side = Side.buy;
+        await when_create_order.InvokeAsync(model);
+    }
+
+    public async Task create_new_sell_order() 
+    {
+        model.side = Side.sell;
+        await when_create_order.InvokeAsync(model);
+    }
 }

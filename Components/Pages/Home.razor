@@ -3,35 +3,21 @@
 @inject OrderBook book
 @rendermode InteractiveServer
 
+
 <MudGrid>
     <MudItem xs="6">
         <MudPaper Class="pa-4" Style="width:100%; height:400px;">
-        <MudStack>
-
-
             <MudText Typo="Typo.h5">
                 CREATE ORDERS
             </MudText>
 
-            <MudText>Mode: @_mode</MudText>
 
-            <MudToggleGroup T="string" SelectionMode="SelectionMode.SingleSelection" @bind-Value="_mode" Color="Color.Primary" CheckMark FixedContent>
-                <MudToggleItem Value="@("MANUAL")" Text="MANUAL" />
-                <MudToggleItem Value="@("AUTO")" Text="AUTOMATIC" />
-            </MudToggleGroup>
-
-            <MudDivider Class="my-2" />
-
-            @if(_mode == "MANUAL")
-            {
                 <OrderInputFields when_create_order="handle_create_order"/>
-            }
-            else
-            {
-                <AutoPlacer on_auto_create="handle_create_order"/>
-            }
-        </MudStack>
 
+    </MudPaper>
+
+    <MudPaper Class="pa-4" Style="width:100%; height:400px;">
+                <AutoPlacer on_auto_create="handle_create_order"/>
     </MudPaper>
     </MudItem>
 
@@ -65,9 +51,6 @@
 
     private PriceChart? pricechart;
 
-    private string _mode = "MANUAL";
-
-
     public void handle_create_order(OrderInput input)
     {
         var i = input;
@@ -77,9 +60,8 @@
             book.place_market_order(i.side,i.Quantity);
     }
 
-        protected override void OnInitialized()
+    protected override void OnInitialized()
     {
-
         book.trade_happened += update_graph;
     }
 
