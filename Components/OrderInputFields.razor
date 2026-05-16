@@ -11,8 +11,8 @@
         </MudRadioGroup>
 
         <MudStack Row="true" Spacing="1">
-            <MudNumericField @bind-Value="model.Quantity" Label="Amount" Style="flex:1;"  Variant="Variant.Outlined" Min="1m" Max="1000m" />
-            <MudNumericField @bind-Value="model.Price" Label="Price" Style="flex:1;"  Variant="Variant.Outlined" Min="0.01m" Max="10000m" Disabled="@(model.Type != OrderType.Limit)"/>
+            <MudNumericField @bind-Value="model.Quantity" Label="Amount" Style="flex:1;"  Variant="Variant.Outlined" Min="1m" Max="10000m" />
+            <MudNumericField @bind-Value="model.Price" Label="Price" Style="flex:1;"  Variant="Variant.Outlined" Min="0.1m" Max="10000m" Disabled="@(model.Type != OrderType.Limit)"/>
         </MudStack>
 
         <MudStack Row="true" Class="mt-3">

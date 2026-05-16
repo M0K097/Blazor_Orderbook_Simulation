@@ -11,14 +11,14 @@
         </MudRadioGroup>
 
         <MudStack Row="true" Spacing="1">
-            <MudNumericField @bind-Value="model.Quantity" Label="Amount" Style="flex:1;"  Variant="Variant.Outlined" Min="1m" Max="1000m" />
-            <MudNumericField @bind-Value="model.Price" Label="Price" Style="flex:1;"  Variant="Variant.Outlined" Min="0.01m" Max="10000m" Disabled="@(model.Type != OrderType.Limit)"/>
+            <MudNumericField @bind-Value="model.Quantity" Label="Amount" Style="flex:1;"  Variant="Variant.Outlined" Min="1m" Max="10000m" />
+            <MudNumericField @bind-Value="model.Price" Label="Price" Style="flex:1;"  Variant="Variant.Outlined" Min="0.1m" Max="10000m" Disabled="@(model.Type != OrderType.Limit)"/>
         </MudStack>
 
         <MudStack Row="true" Class="mt-3">
 
-            <MudButton Variant="Variant.Filled" OnClick="create_new_buy_order" Size="Size.Large" FullWidth="true" Color="Color.Primary">BUY</MudButton>
-            <MudButton Variant="Variant.Filled" OnClick="create_new_sell_order" Size="Size.Large" FullWidth="true" Color="Color.Secondary">SELL</MudButton>
+            <MudButton Variant="Variant.Filled" OnClick="create_new_buy_order" Size="Size.Large" Style="flex:1;"  Color="Color.Primary">BUY</MudButton>
+            <MudButton Variant="Variant.Filled" OnClick="create_new_sell_order" Size="Size.Large" Style="flex:1;" Color="Color.Secondary">SELL</MudButton>
 
         </MudStack>
 
