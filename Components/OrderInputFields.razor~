@@ -1,9 +1,12 @@
+@inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.Medium" Class="pa-0">
 
     <MudStack Spacing="1">
         
-        <MudText Typo="Typo.h5"> CREATE ORDERS </MudText>
+        <MudStack Row="true" Justify="Justify.Center">
+            <MudText Typo="Typo.h5"> CREATE ORDERS </MudText>
+        </MudStack>
 
         <MudRadioGroup @bind-Value="model.Type" Class="big-radio">
             <MudRadio Value="OrderType.Limit" Color="Color.Primary">Limit</MudRadio>
@@ -37,6 +40,7 @@
     {
         model.side = Side.buy;
         await when_create_order.InvokeAsync(model);
+        Snackbar.Add("The reactor was fired up successfully", Severity.Info);
     }
 
     public async Task create_new_sell_order() 
