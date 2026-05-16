@@ -1,61 +1,38 @@
 
-<h3>Automatic Order Generator</h3>
-
-
 <MudGrid>
     <MudItem xs="6">
-        <MudSlider @bind-Value="@Speed" min="100" max="10000">Speed: @Speed.ToString()</MudSlider>
+        <MudStack>
 
-<label>Maximal Price: @MaxPrice</label>
+            <MudSlider @bind-Value="@Speed" min="10" max="5000">Speed: @Speed.ToString()</MudSlider>
+            <MudSlider @bind-Value="@MaxPrice" min="1" max="10000">Maximal Price: @MaxPrice.ToString()</MudSlider>
+            <MudSlider @bind-Value="@MaxAmount" min="1" max="10000">Maximal Amount: @MaxAmount.ToString()</MudSlider>
 
-    <input type="range"
-            min="1"
-            max="1000000"
-            @bind="MaxPrice"
-            @bind:event="oninput"/>
+        </MudStack>
     </MudItem>
+    
     <MudItem xs="6">
+        <MudStack>
 
+            <MudSlider @bind-Value="@Optimism" min="0" step="0.1" max="1">Otimism: @Optimism.ToString()</MudSlider>
+            <MudSlider @bind-Value="@Variance" min="0" step="0.1" max="1">Variance: @Variance.ToString()</MudSlider>
+            <MudSlider @bind-Value="@Liquidity" min="0" step="0.1" max="1">Variance: @Liquidity.ToString()</MudSlider>
 
-<label>Maximal Amount: @MaxAmount</label>
-<input type="range"
-        min="1"
-        max="10000"
-        @bind="MaxAmount"
-        @bind:event="oninput"/>
-
-
-<label>Optimism: @Optimism</label>
-
-<input type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        @bind="Optimism"
-        @bind:event="oninput"/>
-
+        </MudStack>
     </MudItem>
 
-    <MudItem xs="6">
-
-<label>Variance: @Variance</label>
-<input type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        @bind="Variance"
-        @bind:event="oninput"/>
-
-@if(!IsRunning)
-{
-    <button @onclick="Start">START</button>
-}
-else
-{
-    <button @onclick="Stop">STOP</button>
-}
+    <MudItem xs="12">
+        <MudStack Row="true" Justify="Justify.Center">
+        @if(!IsRunning)
+        {
+            <MudButton Variant="Variant.Filled" OnClick="Start" Size="Size.Large" Style="flex:1;"  Color="Color.Primary">START</MudButton>
+        }
+        else
+        {
+            <MudButton Variant="Variant.Filled" OnClick="Stop" Size="Size.Large" Color="Color.Secondary">STOP</MudButton>
+        }
+        
+        </MudStack>
     </MudItem>
-
 </MudGrid>
 
 @code
@@ -72,6 +49,7 @@ else
     public decimal MaxAmount {get;set;} = 100;
     public double Optimism {get;set;} = 0.5; 
     public double Variance {get; set;} = 0.1;
+    public double Liquidity {get; set;} = 0.5;
     public decimal Min = 1;
 
     private Random random = new Random();

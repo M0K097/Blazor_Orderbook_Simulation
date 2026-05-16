@@ -6,16 +6,17 @@
 <MudGrid>
 
     <MudItem xs="6">
-        <MudPaper Class="pa-4" Style="width:100%; height:400px;">
+        <MudPaper Class="pa-4" Style="width:100%; height:500px; overflow:auto;">
 
             <OrderInputFields when_create_order="handle_create_order"/>
+            <MudDivider Class="my-4" />
             <AutoPlacer on_auto_create="handle_create_order"/>
             
         </MudPaper>
     </MudItem>
 
     <MudItem xs="6">
-        <MudPaper Style="width:100%; height:400px; overflow:auto;">
+        <MudPaper Style="width:100%; height:500px; overflow:auto;">
             <Book book=@orderbook/>
         </MudPaper>
     </MudItem>
