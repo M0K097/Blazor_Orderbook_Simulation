@@ -19,8 +19,7 @@
     
 @code {
 
-    [Parameter]
-    public List<PriceData> Data { get; set; } = new(); 
+    private List<PriceData> Data { get; set; } = new();
     private ApexChart<PriceData>? chart; 
     private int time_counter = 0;
 
@@ -34,26 +33,24 @@
         time_counter++;
     }
 
-
     private ApexCharts.ApexChartOptions<PriceData> options = new()
     {
     Chart = new ApexCharts.Chart
     {
         Animations = new ApexCharts.Animations
         {
-            Enabled = true;
+            Enabled = false
         },
         Toolbar = new ApexCharts.Toolbar
         {
-            Show = true;
+            Show = true
         },
     },
     Tooltip = new ApexCharts.Tooltip
     {
-        Enabled = true;
+        Enabled = true
     }
 };
- 
 
     public class PriceData
     {

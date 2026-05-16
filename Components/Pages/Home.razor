@@ -1,8 +1,7 @@
 @page "/"
 @inherits LayoutComponentBase
-@inject OrderBook book
+@inject OrderBook orderbook
 @rendermode InteractiveServer
-
 
 <MudGrid>
 
@@ -17,8 +16,7 @@
 
     <MudItem xs="6">
         <MudPaper Style="width:100%; height:400px; overflow:auto;">
-            <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
-            <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
+            <Book book=@orderbook/>
         </MudPaper>
     </MudItem>
 
@@ -30,7 +28,7 @@
 
     <MudItem xs="12">
         <MudPaper Class="pa-4" Style="width:100%;">
-          <ExecutionTable executions="@book.trade_log"/>
+          <ExecutionTable executions="@orderbook.trade_log"/>
         </MudPaper>
     </MudItem>
 
@@ -40,24 +38,24 @@
 @code {
 
     private PriceChart? pricechart;
+    private decimal last_execution_price {get;set;} = 0;
 
-    protected override void OnInitialized() => book.trade_happened += update_graph;
+    protected override void OnInitialized() => orderbook.trade_happened += update_graph;
 
     public void handle_create_order(OrderInput input)
     {
         var i = input;
         if(i.Type == OrderType.Limit)
-            book.place_limit_order(i.side,i.Quantity,i.Price);
+            orderbook.place_limit_order(i.side,i.Quantity,i.Price);
         else if(i.Type == OrderType.Market)
-            book.place_market_order(i.side,i.Quantity);
+            orderbook.place_market_order(i.side,i.Quantity);
     }
-
 
     public async void update_graph()
     {
-        if(book.trade_log.Count > 0)
+        if(orderbook.trade_log.Count > 0)
         {
-            var last_trade = book.trade_log.Last();
+            var last_trade = orderbook.trade_log.Last();
             await pricechart!.add_datapoint(last_trade.execution_price);
         }
     }

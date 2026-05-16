@@ -2,14 +2,17 @@
 @if(orders is not null)
 {
     <table class="@CssClass table-shadow">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>AMOUNT</th>
-                <th>PRICE</th>
-                <th>FILL</th>
-            </tr>
-        </thead>
+        @if(show_head)
+        {
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>AMOUNT</th>
+                    <th>PRICE</th>
+                    <th>FILL</th>
+                </tr>
+            </thead>
+        }
         <tbody>
             @foreach(var o in orders.TakeLast(10))
             {
@@ -28,6 +31,9 @@
 {
     [Parameter]
     public List<LimitOrder>? orders {get;set;}
+
+    [Parameter]
+    public bool show_head {get;set;} = true;
 
     [Parameter] 
     public string CssClass { get; set; } = "";

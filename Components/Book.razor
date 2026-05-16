@@ -1,0 +1,25 @@
+
+<OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
+
+@if(book.trade_log.Count > 0)
+{
+    @if(last_execution_price < book.trade_log.Last().execution_price)
+    {
+        <MudText Typo="Typo.h5" Color="Color.Success"> @book.trade_log.Last().execution_price </MudText>
+    }
+    else
+    {
+        <MudText Typo="Typo.h5" Color="Color.Error"> @book.trade_log.Last().execution_price </MudText>
+    }
+    last_execution_price = @book.trade_log.Last().execution_price;
+}
+
+<OrderTable orders="@book.BIDS" show_head="false" CssClass="table-light-green"/>
+
+@code
+{
+    [Parameter]
+    public OrderBook book {get;set;} = new();
+
+    private decimal last_execution_price {get;set;} = 0;
+}

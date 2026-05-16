@@ -1,15 +1,18 @@
 
 @if(orders is not null)
 {
-    <table class="@CssClass">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>AMOUNT</th>
-                <th>PRICE</th>
-                <th>FILL</th>
-            </tr>
-        </thead>
+    <table class="@CssClass table-shadow">
+        @if(show_head)
+        {
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>AMOUNT</th>
+                    <th>PRICE</th>
+                    <th>FILL</th>
+                </tr>
+            </thead>
+        }
         <tbody>
             @foreach(var o in orders.TakeLast(10))
             {
