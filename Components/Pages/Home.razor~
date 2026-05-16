@@ -5,56 +5,47 @@
 
 
 <MudGrid>
+
     <MudItem xs="6">
         <MudPaper Class="pa-4" Style="width:100%; height:400px;">
-            <MudText Typo="Typo.h5">
-                CREATE ORDERS
-            </MudText>
+            <OrderInputFields when_create_order="handle_create_order"/>
+        </MudPaper>
+    </MudItem>
 
-
-                <OrderInputFields when_create_order="handle_create_order"/>
-                <OrderInputFields when_create_order="handle_create_order"/>
-
-
-    </MudPaper>
-
-    <MudPaper Class="pa-4" Style="width:100%; height:400px;">
-                <AutoPlacer on_auto_create="handle_create_order"/>
-    </MudPaper>
+    <MudItem xs="6">
+        <MudPaper Class="pa-4" Style="width:100%; height:400px;">
+            <AutoPlacer on_auto_create="handle_create_order"/>
+        </MudPaper>
     </MudItem>
 
 
     <MudItem xs="6">
-    <MudPaper Style="width:100%; height:400px; overflow:auto;">
-          <MudText Typo="Typo.h5">
-                ORDERBOOK
-            </MudText>
-        <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
-        <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
-    </MudPaper>
+        <MudPaper Style="width:100%; height:400px; overflow:auto;">
+            <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
+            <OrderTable orders="@book.BIDS" CssClass="table-light-green"/>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="6">
+        <MudPaper Class="pa-4" Style="width:100%;">
+              <PriceChart @ref="pricechart"/>
+        </MudPaper>
     </MudItem>
 
     <MudItem xs="12">
-    <MudPaper Class="pa-4" Style="width:100%;">
-          <PriceChart @ref="pricechart"/>
-    </MudPaper>
-    </MudItem>
-
-    <MudItem xs="12">
-    <MudPaper Class="pa-4" Style="width:100%;">
+        <MudPaper Class="pa-4" Style="width:100%;">
           <ExecutionTable executions="@book.trade_log"/>
-    </MudPaper>
+        </MudPaper>
     </MudItem>
-</MudGrid>
 
+</MudGrid>
 
 
 @code {
 
     private PriceChart? pricechart;
 
-    private string _mode = "MANUAL";
-
+    protected override void OnInitialized() => book.trade_happened += update_graph;
 
     public void handle_create_order(OrderInput input)
     {
@@ -65,11 +56,6 @@
             book.place_market_order(i.side,i.Quantity);
     }
 
-        protected override void OnInitialized()
-    {
-
-        book.trade_happened += update_graph;
-    }
 
     public async void update_graph()
     {
@@ -79,6 +65,4 @@
             await pricechart!.add_datapoint(last_trade.execution_price);
         }
     }
-
-
 }
