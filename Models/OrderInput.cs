@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 public enum OrderType
 {
     Limit,
@@ -9,12 +8,8 @@ public class OrderInput
     public OrderType Type {get;set;}
     public Side side {get;set;}
 
-    [Required]
-    [Range(1,999)]
-    public decimal Price {get;set;}
+    public decimal Price {get;set;} = 1;
 
-    [Required]
-    [Range(1,999)]
-    public decimal Quantity {get;set;}
+    public decimal Quantity {get;set;} = 1;
 }
 

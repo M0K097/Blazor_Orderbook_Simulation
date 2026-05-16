@@ -88,8 +88,8 @@
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/1j8oabzfj7-{0}-qz6clc5837-qz6clc5837.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/0g0tdqq8mx-{0}-ody88ncx6z-ody88ncx6z.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/blazor_o.E9555BB1.Up2Date
-/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/fthv2mh8lq-{0}-q7ka22hqad-q7ka22hqad.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/bin/Debug/net10.0/MudBlazor.dll
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/tzxjg6is5z-{0}-6x2ajsl5c8-6x2ajsl5c8.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/0wz98yz2xy-{0}-jolev99wdd-jolev99wdd.gz
 /home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/o7k4cxtn0u-{0}-h82a7aihv0-h82a7aihv0.gz
+/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/obj/Debug/net10.0/compressed/fthv2mh8lq-{0}-6xg31voad5-6xg31voad5.gz
