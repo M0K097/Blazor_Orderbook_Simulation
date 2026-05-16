@@ -3,6 +3,7 @@ public class Worker
 {
     private CancellationTokenSource? _cts;
     private Func<Task> async_work {get;set;} 
+    public int Speed = 1000;
 
     public void Start()
     {
@@ -24,7 +25,7 @@ public class Worker
             while (!token.IsCancellationRequested)
             {
                 await async_work();
-                await Task.Delay(1000, token);
+                await Task.Delay(Speed, token);
             }
         }
         catch (OperationCanceledException)
