@@ -3,7 +3,9 @@
 
     <MudStack Spacing="1">
         
-        <MudText Typo="Typo.h5"> CREATE ORDERS </MudText>
+        <MudStack Row="true" Justify="Justify.Center">
+            <MudText Typo="Typo.h5"> CREATE ORDERS </MudText>
+        </MudStack>
 
         <MudRadioGroup @bind-Value="model.Type" Class="big-radio">
             <MudRadio Value="OrderType.Limit" Color="Color.Primary">Limit</MudRadio>

@@ -1,5 +1,8 @@
 
-<MudText Typo="Typo.h5"> AUTOMATIC ORDER PLACEMENT </MudText>
+<MudStack Justify="Justify.Center" AlignItems="AlignItems.Center">
+    <MudText Typo="Typo.h5"> AUTOMATIC ORDER PLACEMENT </MudText>
+</MudStack>
+
 <MudGrid>
     <MudItem xs="6">
         <MudStack>
@@ -22,14 +25,16 @@
     </MudItem>
 
     <MudItem xs="12">
-        <MudStack Row="true" Justify="Justify.Center">
+        <MudStack Justify="Justify.Center" Row="true" AlignItems="AlignItems.Center">
+
         @if(!IsRunning)
         {
-            <MudButton Variant="Variant.Filled" OnClick="Start" Size="Size.Large" Style="flex:1;"  Color="Color.Primary">START</MudButton>
+            <MudButton Variant="Variant.Filled" OnClick="Start" Size="Size.Large" Color="Color.Primary">START</MudButton>
         }
         else
         {
             <MudButton Variant="Variant.Filled" OnClick="Stop" Size="Size.Large" Color="Color.Secondary">STOP</MudButton>
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true"/>
         }
         
         </MudStack>
