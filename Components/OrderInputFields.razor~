@@ -5,14 +5,13 @@
         <MudToggleItem Value="@(OrderType.Market)" Text="MARKET" />
     </MudToggleGroup>
 
-    <MudTextField @bind-Value="model.Quantity" Label="Quantity" Variant="Variant.Outlined"></MudTextField>
+    <MudNumericField @bind-Value="model.Quantity" Label="Standard" Variant="Variant.Outlined" Min="1m" Max="1000m" />
     @if(model.Type == OrderType.Limit)
     {
-        <MudTextField @bind-Value="model.Price" Label="Price" Variant="Variant.Outlined"></MudTextField>
+        <MudNumericField @bind-Value="model.Price" Label="Standard" Variant="Variant.Outlined" Min="0.01m" Max="10000m" />
     }
     <MudButton Variant="Variant.Filled" OnClick="create_new_buy_order" Size="Size.Large" Color="Color.Primary">BUY</MudButton>
     <MudButton Variant="Variant.Filled" OnClick="create_new_sell_order" Size="Size.Large" Color="Color.Secondary">SELL</MudButton>
-
 
 @code
 {
