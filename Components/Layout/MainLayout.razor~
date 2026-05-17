@@ -9,7 +9,11 @@
 
 @* Needed for snackbars *@
 <MudSnackbarProvider />
+ 
 
+<MudThemeProvider Theme="_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <MudLayout>
     <MudAppBar>
@@ -28,8 +32,19 @@
 
 @code
 {
-    bool _drawerOpen = true;
+    bool _drawerOpen = false;
 
     void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+     private MudTheme _theme = new()
+    {
+        Typography = new Typography()
+        {
+            Default = new DefaultTypography()
+            {
+                FontSize = "18px"
+            }
+        }
+    };
 }
 

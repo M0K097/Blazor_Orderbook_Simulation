@@ -32,6 +32,9 @@
     [Parameter]
     public List<LimitOrder>? orders {get;set;}
 
+    [Parameter]
+    public bool show_head {get;set;} = true;
+
     [Parameter] 
     public string CssClass { get; set; } = "";
 }

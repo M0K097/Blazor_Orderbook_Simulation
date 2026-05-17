@@ -1,15 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
-@* Required *@
-<MudThemeProvider />
+<MudThemeProvider Theme="_theme" />
 <MudPopoverProvider />
-
-@* Needed for dialogs *@
 <MudDialogProvider />
-
-@* Needed for snackbars *@
 <MudSnackbarProvider />
-
 
 <MudLayout>
     <MudAppBar>
@@ -31,5 +25,16 @@
     bool _drawerOpen = false;
 
     void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+     private MudTheme _theme = new()
+    {
+        Typography = new Typography()
+        {
+            Default = new DefaultTypography()
+            {
+                FontSize = "18px"
+            }
+        }
+    };
 }
 

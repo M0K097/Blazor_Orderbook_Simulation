@@ -9,6 +9,7 @@
 
             <MudPaper Class="pa-4" Style="width:100%; height:550px; overflow:auto;">
                 <OrderInputFields when_create_order="handle_create_order"/>
+                <MudDivider Class="my-3" />
                 <AutoPlacer on_auto_create="handle_create_order"/>
             </MudPaper>
             

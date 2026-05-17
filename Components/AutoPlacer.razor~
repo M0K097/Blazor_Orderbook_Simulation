@@ -3,6 +3,7 @@
     <MudText Typo="Typo.h5"> AUTOMATIC ORDER PLACEMENT </MudText>
 </MudStack>
 
+<MudContainer MaxWidth="MaxWidth.Medium">
 <MudGrid>
     <MudItem xs="6">
         <MudStack>
@@ -11,8 +12,8 @@
             {
                 <MudSlider @bind-Value="@loop_worker.Speed" min="10" max="5000">Speed: @loop_worker.Speed.ToString()</MudSlider>
             }
-            <MudSlider @bind-Value="@MaxPrice" min="1" max="10000" Variant="Variant.Filled" Color="Color.Error">Maximal Price: @MaxPrice.ToString()</MudSlider>
-            <MudSlider @bind-Value="@MaxAmount" min="1" max="10000" Variant="Variant.Filled" Color="Color.Error">Maximal Amount: @MaxAmount.ToString()</MudSlider>
+            <MudSlider @bind-Value="@MaxPrice" min="1" max="1000" Variant="Variant.Filled" Color="Color.Error">Maximal Price: @MaxPrice.ToString()</MudSlider>
+            <MudSlider @bind-Value="@MaxAmount" min="1" max="1000" Variant="Variant.Filled" Color="Color.Error">Maximal Amount: @MaxAmount.ToString()</MudSlider>
 
         </MudStack>
     </MudItem>
@@ -20,9 +21,9 @@
     <MudItem xs="6">
         <MudStack>
 
-            <MudSlider @bind-Value="@Optimism" min="0" step="0.1" max="1">Otimism: @Optimism.ToString()</MudSlider>
-            <MudSlider @bind-Value="@Variance" min="0" step="0.1" max="1">Variance: @Variance.ToString()</MudSlider>
-            <MudSlider @bind-Value="@Liquidity" min="0" step="0.1" max="1">Liquidity: @Liquidity.ToString()</MudSlider>
+            <MudSlider @bind-Value="@Optimism" min="0" step="0.1" max="1" Variant="Variant.Filled">Otimism: @Optimism.ToString()</MudSlider>
+            <MudSlider @bind-Value="@Variance" min="0" step="0.1" max="1" Variant="Variant.Filled">Variance: @Variance.ToString()</MudSlider>
+            <MudSlider @bind-Value="@Liquidity" min="0" step="0.1" max="1" Variant="Variant.Filled">Liquidity: @Liquidity.ToString()</MudSlider>
 
         </MudStack>
     </MudItem>
@@ -43,6 +44,7 @@
         </MudStack>
     </MudItem>
 </MudGrid>
+</MudContainer>
 
 @code
 {

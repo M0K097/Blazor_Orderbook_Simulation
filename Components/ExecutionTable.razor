@@ -1,28 +1,22 @@
 @if(executions is not null)
 {
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>TAKER</th>
-                <th>MAKER</th>
-                <th>QUANTITY</th>
-                <th>PRICE</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var e in executions.TakeLast(10))
-            {
-                <tr>
-                    <td>@e.log_id</td>
-                    <td>@e.taker_id</td>
-                    <td>@e.maker_id</td>
-                    <td>@e.quantity</td>
-                    <td>@e.execution_price</td>
-               </tr>
-            }
-        </tbody>
-    </table>
+
+    <MudTable Items="@executions.Take(10)" Hover="true" Striped="true" Bordered="true">
+        <HeaderContent>
+            <MudTh>ID</MudTh>
+            <MudTh>TAKER</MudTh>
+            <MudTh>MAKER</MudTh>
+            <MudTh>QUANTITY</MudTh>
+            <MudTh>PRICE</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="ID">@context.log_id</MudTd>
+            <MudTd DataLabel="TAKER">@context.taker_id</MudTd>
+            <MudTd DataLabel="MAKER">@context.maker_id</MudTd>
+            <MudTd DataLabel="QUANTITY">@context.quantity</MudTd>
+            <MudTd DataLabel="PRICE">@context.execution_price</MudTd>
+        </RowTemplate>
+    </MudTable>
 }
 
 @code
