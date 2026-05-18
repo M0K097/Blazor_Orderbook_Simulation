@@ -7,8 +7,10 @@ public class Tradelog
     public decimal quantity {get;set;}
     public decimal execution_price { get; set; }
     public DateTime time {get; set;}
-    public List<Order> Takers {get;set;} = new();
-    public List<Order> Makers {get;set;} = new();
+    public Order Taker {get;set;} = null!;
+    public Order Maker {get;set;} = null!;
+    public int market_id {get;set;}
+    public Market Market {get;set;} = null!;
 
     public void print()
     {
@@ -18,6 +20,8 @@ public class Tradelog
                 $" - qnt:{quantity}" +
                 $" = execution-price: {execution_price}");
     }
+
+    public Tradelog(){}
 
     public Tradelog(int new_order_id, int resting_order_id, decimal qty, decimal price)
     {

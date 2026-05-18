@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public enum Side
 {
     buy,
@@ -16,7 +18,8 @@ public abstract class Order
 {
     public static int order_id_counter = 0;
 
-    public int order_id { get; }
+    [Key]
+    public int order_id { get; set;}
     public Side order_side { get; }
     public decimal quantity { get; }
     public DateTime time { get; }
@@ -43,6 +46,8 @@ public abstract class Order
             status = Status.partially_filled;
     }
 
+    public Order(){}
+
     public Order(Side side, decimal quantity)
     {
         this.order_id = Order.order_id_counter++;
@@ -59,6 +64,8 @@ public abstract class Order
 public class LimitOrder : Order
 {
     public decimal price { get; private set; }
+
+    public LimitOrder(){}
     public LimitOrder(Side side, decimal quantity, decimal price) : base(side, quantity)
     {
         this.price = price;
@@ -67,6 +74,7 @@ public class LimitOrder : Order
 
 public class MarketOrder : Order
 {
+    public MarketOrder(){}
     public MarketOrder(Side side, decimal quantity) : base(side, quantity){}
 }
 

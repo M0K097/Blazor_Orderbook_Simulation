@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 public class Tradelog
 {
     private static int log_id_counter = 0;
+    [Key]
     public int log_id { get; set; }
     public int taker_id { get; set; }
     public int maker_id { get; set; }
@@ -9,6 +12,8 @@ public class Tradelog
     public DateTime time {get; set;}
     public Order Taker {get;set;} = null!;
     public Order Maker {get;set;} = null!;
+    public int market_id {get;set;}
+    public Market Market {get;set;} = null!;
 
     public void print()
     {
@@ -18,6 +23,8 @@ public class Tradelog
                 $" - qnt:{quantity}" +
                 $" = execution-price: {execution_price}");
     }
+
+    public Tradelog(){}
 
     public Tradelog(int new_order_id, int resting_order_id, decimal qty, decimal price)
     {

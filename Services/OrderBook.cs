@@ -1,8 +1,8 @@
 
 public class OrderBook
 {
-    public List<LimitOrder> BIDS { get; private set; } = new List<LimitOrder>();
-    public List<LimitOrder> ASKS { get; private set; } = new List<LimitOrder>();
+    public List<LimitOrder> BIDS { get; set; } = new List<LimitOrder>();
+    public List<LimitOrder> ASKS { get; set; } = new List<LimitOrder>();
     public List<Tradelog> trade_log = new List<Tradelog>();
 
     public event Action? trade_happened;

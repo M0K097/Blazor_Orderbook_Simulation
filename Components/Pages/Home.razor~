@@ -2,6 +2,8 @@
 @inherits LayoutComponentBase
 @inject OrderBook orderbook
 @rendermode InteractiveServer
+@inject IDbContextFactory<AppDbContext> Factory
+@using Microsoft.EntityFrameworkCore
 
 <MudGrid>
 
@@ -37,6 +39,8 @@
 
 </MudGrid>
 
+<MudButton OnClick="safe_to_db">safe</MudButton>
+
 
 @code {
 
@@ -44,7 +48,13 @@
     private AutoPlacer? auto_placer;
     private decimal last_execution_price {get;set;} = 0;
 
-    protected override void OnInitialized() => orderbook.trade_happened += update_graph;
+
+    protected override void OnInitialized() 
+    {
+        orderbook.trade_happened += update_graph;
+        using var db = Factory.CreateDbContext();
+        orderbook.ASKS = db.Orders.OfType<LimitOrder>().ToList();
+    }
 
     public void handle_create_order(OrderInput input)
     {
@@ -57,6 +67,13 @@
         {
             orderbook.place_market_order(i.side,i.Quantity);
         }
+    }
+
+    public async Task safe_to_db()
+    {
+        using var db = Factory.CreateDbContext();
+        db.Orders.Add(orderbook.ASKS.First());
+        await db.SaveChangesAsync();
     }
 
     public void stop_autoplacer()
