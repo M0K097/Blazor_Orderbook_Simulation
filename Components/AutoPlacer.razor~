@@ -30,7 +30,7 @@
     <MudItem xs="12">
         <MudStack Justify="Justify.Center" Row="true" AlignItems="AlignItems.Center">
 
-        @if(!IsRunning)
+        @if(loop_worker is not null && !loop_worker.is_running)
         {
             <MudButton Variant="Variant.Filled" OnClick="Start" Size="Size.Large" Color="Color.Primary">START</MudButton>
         }
@@ -49,9 +49,7 @@
     [Parameter]
     public EventCallback<OrderInput> on_auto_create {get;set;}
 
-    private bool IsRunning = false;
-
-    Worker? loop_worker {get;set;}
+    public Worker? loop_worker {get;set;}
 
     public decimal MaxPrice {get;set;} = 100;
     public decimal MaxAmount {get;set;} = 100;
@@ -75,8 +73,8 @@
         input.Quantity = Min + (decimal)random.NextDouble() * (MaxAmount - Min);
 
         var type_chance = random.Next(0,100); 
-        if(type_chance < Liquidity * 100)
-            input.Type = OrderType.Limit;
+        if(type_chance > Liquidity * 100)
+            input.Type = OrderType.Market;
         
         var side_chance = random.Next(0,100);
         if(side_chance < Optimism * 100)
@@ -124,19 +122,14 @@
 
     public void Stop()
     {
-        if(loop_worker != null)
-        {
-            loop_worker.Stop();
-            IsRunning = false;
-        }
+        if(loop_worker is null) return;
+        loop_worker.Stop();
+        await InvokeAsync(StateHasChanged);
     }
     
     public void Start()
     {
-        if(loop_worker != null)
-        {
-            loop_worker.Start();
-            IsRunning = true;
-        }
+        if(loop_worker is null) return;
+        loop_worker.Start();
     }
 }

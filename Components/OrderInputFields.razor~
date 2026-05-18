@@ -40,12 +40,13 @@
     {
         model.side = Side.buy;
         await when_create_order.InvokeAsync(model);
-        Snackbar.Add("The reactor was fired up successfully", Severity.Info);
+        Snackbar.Add("Buy-Order placed", Severity.Info);
     }
 
     public async Task create_new_sell_order() 
     {
         model.side = Side.sell;
         await when_create_order.InvokeAsync(model);
+        Snackbar.Add("Sell-Order placed", Severity.Info);
     }
 }

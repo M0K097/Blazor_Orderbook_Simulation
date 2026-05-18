@@ -2,7 +2,8 @@
 public class Worker
 {
     private CancellationTokenSource? _cts;
-    private Func<Task> async_work {get;set;} 
+    private Func<Task> async_work { get; set; }
+    public bool is_running { get; private set; } = false;
     public int Speed = 1000;
 
     public void Start()
@@ -10,12 +11,15 @@ public class Worker
         if (_cts != null) return;
         _cts = new CancellationTokenSource();
         _ = LoopAsync(_cts.Token);
+        is_running = true;
     }
 
     public void Stop()
     {
-        _cts?.Cancel();
-        _cts = null; 
+        if(_cts == null) return;
+        _cts.Cancel();
+        _cts = null;
+        is_running = false;
     }
 
     private async Task LoopAsync(CancellationToken token)
@@ -39,4 +43,4 @@ public class Worker
         async_work = async_method_to_loop;
     }
 }
- 
+

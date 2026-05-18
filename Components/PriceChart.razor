@@ -4,6 +4,7 @@
     <ApexChart TItem="PriceData"
                Title="Price" 
                options="options"
+               OnZoomed="zoomed"
                @ref="chart"
                Width="@("100%")"
                Height="500" >
@@ -18,7 +19,10 @@
     </ApexChart>
     
 @code {
-
+    
+    [Parameter]
+    public EventCallback is_zoomed {get;set;}
+    
     private List<PriceData> Data { get; set; } = new();
     private ApexChart<PriceData>? chart; 
     private int time_counter = 0;
@@ -32,6 +36,8 @@
 
         time_counter++;
     }
+
+    private async void zoomed() => await is_zoomed.InvokeAsync();
 
     private ApexCharts.ApexChartOptions<PriceData> options = new()
     {

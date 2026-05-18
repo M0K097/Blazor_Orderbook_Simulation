@@ -10,7 +10,7 @@
             <MudPaper Class="pa-4" Style="width:100%; height:600px; overflow:auto;">
                 <OrderInputFields when_create_order="handle_create_order"/>
                 <MudDivider Class="my-3" />
-                <AutoPlacer on_auto_create="handle_create_order"/>
+                <AutoPlacer @ref="auto_placer" on_auto_create="handle_create_order"/>
             </MudPaper>
             
     </MudItem>
@@ -25,7 +25,7 @@
 
     <MudItem xs="12">
         <MudPaper Class="pa-4" Style="width:100%;">
-              <PriceChart @ref="pricechart"/>
+              <PriceChart is_zoomed="stop_autoplacer"  @ref="pricechart"/>
         </MudPaper>
     </MudItem>
 
@@ -41,6 +41,7 @@
 @code {
 
     private PriceChart? pricechart;
+    private AutoPlacer? auto_placer;
     private decimal last_execution_price {get;set;} = 0;
 
     protected override void OnInitialized() => orderbook.trade_happened += update_graph;
@@ -56,6 +57,12 @@
         {
             orderbook.place_market_order(i.side,i.Quantity);
         }
+    }
+
+    public void stop_autoplacer()
+    {
+        if(auto_placer is not null)
+            auto_placer.Stop();
     }
 
     public async void update_graph()
