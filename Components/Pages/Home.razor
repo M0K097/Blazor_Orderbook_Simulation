@@ -70,7 +70,7 @@
         if(orderbook.trade_log.Count > 0)
         {
             var last_trade = orderbook.trade_log.Last();
-            await pricechart!.add_datapoint(last_trade.execution_price);
+            await pricechart!.add_datapoint(last_trade.execution_price,last_trade.time);
         }
     }
 }

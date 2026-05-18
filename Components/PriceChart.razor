@@ -25,16 +25,13 @@
     
     private List<PriceData> Data { get; set; } = new();
     private ApexChart<PriceData>? chart; 
-    private int time_counter = 0;
 
-    public async Task add_datapoint(decimal price_value)
+    public async Task add_datapoint(decimal price_value, DateTime time)
     {
-        var datapoint = new PriceData(price_value,time_counter);
+        var datapoint = new PriceData(price_value,time);
         Data.Add(datapoint);
         if(chart != null)
             await chart.UpdateSeriesAsync();
-
-        time_counter++;
     }
 
     private async void zoomed() => await is_zoomed.InvokeAsync();
@@ -54,8 +51,23 @@
         Zoom = new Zoom
         {
             Enabled = true
-        },
+        }
     },
+
+    Xaxis = new ApexCharts.XAxis
+    {
+        Type = ApexCharts.XAxisType.Datetime,
+        TickAmount = 6,
+        Labels = new ApexCharts.XAxisLabels
+        {
+            HideOverlappingLabels = true,
+            DatetimeFormatter = new ApexCharts.DatetimeFormatter
+            {
+                Hour = "HH:mm"
+            }
+        }
+    },
+
     Tooltip = new ApexCharts.Tooltip
     {
         Enabled = true
@@ -65,9 +77,9 @@
     public class PriceData
     {
         public decimal price {get;set;}
-        public int time {get;set;}
+        public DateTime time {get;set;}
 
-        public PriceData(decimal price, int time)
+        public PriceData(decimal price, DateTime time)
         {
             this.price = price;
             this.time = time;

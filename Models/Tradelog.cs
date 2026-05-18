@@ -6,6 +6,7 @@ public class Tradelog
     public int maker_id { get; set; }
     public decimal quantity {get;set;}
     public decimal execution_price { get; set; }
+    public DateTime time {get; set;}
 
     public void print()
     {
@@ -23,5 +24,6 @@ public class Tradelog
         this.maker_id = resting_order_id;
         this.quantity = qty;
         execution_price = price;
+        time = DateTime.Now;
     }
 }
