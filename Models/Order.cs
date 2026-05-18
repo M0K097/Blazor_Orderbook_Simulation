@@ -24,6 +24,9 @@ public abstract class Order
     public decimal filled { get; private set; }
     public decimal remaining { get; private set; }
 
+    public List<Tradelog> MakerTrades { get; set; } = new();
+    public List<Tradelog> TakerTrades { get; set; } = new();
+
     public void cancel_order() => status = Status.cancelled;
 
     public void fill(decimal qty)
@@ -49,6 +52,7 @@ public abstract class Order
         this.status = Status.open;
         this.filled = 0;
         this.remaining = this.quantity;
+
     }
 }
 

@@ -7,6 +7,8 @@ public class Tradelog
     public decimal quantity {get;set;}
     public decimal execution_price { get; set; }
     public DateTime time {get; set;}
+    public Order Taker {get;set;} = null!;
+    public Order Maker {get;set;} = null!;
 
     public void print()
     {
