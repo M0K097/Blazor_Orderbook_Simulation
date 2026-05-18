@@ -3,7 +3,6 @@
     <MudText Typo="Typo.h5"> AUTOMATIC ORDER PLACEMENT </MudText>
 </MudStack>
 
-<MudContainer MaxWidth="MaxWidth.Medium">
 <MudGrid>
     <MudItem xs="6">
         <MudStack>
@@ -44,7 +43,6 @@
         </MudStack>
     </MudItem>
 </MudGrid>
-</MudContainer>
 
 @code
 {
@@ -64,12 +62,22 @@
 
     private Random random = new Random();
 
+    private decimal last_price;
+
     public OrderInput make_input()
     {
         OrderInput input = new();
-        input.Price = Min + (decimal)random.NextDouble() * (MaxPrice - Min);
+        
+        var p = generate_price();
+        input.Price = p;
+        last_price = p;
+
         input.Quantity = Min + (decimal)random.NextDouble() * (MaxAmount - Min);
-        input.Type = OrderType.Limit;
+
+        var type_chance = random.Next(0,100); 
+        if(type_chance < Liquidity * 100)
+            input.Type = OrderType.Limit;
+        
         var side_chance = random.Next(0,100);
         if(side_chance < Optimism * 100)
             input.side = Side.buy;
@@ -83,23 +91,52 @@
     {
         var o = make_input();
         await on_auto_create.InvokeAsync(o);
-        Console.WriteLine("test");
-        Console.WriteLine(o.Price);
+        Console.WriteLine($"automatic order created {o.Type}");
     } 
+
+    private decimal generate_price()
+    {
+        decimal price = last_price;
+        var max_possible_variance = MaxPrice * (decimal)Variance;
+        var applied_variance = (decimal)random.NextDouble() * max_possible_variance;
+
+        var direction = random.Next(100); 
+        if(direction < 50)
+            price -= applied_variance;
+        else
+            price += applied_variance;
+        
+        if(price < Min)
+            price = Min;
+        else if(price > MaxPrice)
+            price = MaxPrice;
+
+        Console.WriteLine($"created price from last_price:{last_price}  applied_variance:{applied_variance} RESULT ==> {price}");
+
+        return price;
+    }
     
-    protected override void OnInitialized() => loop_worker = new Worker(for_worker);
+    protected override void OnInitialized()
+    {
+        loop_worker = new Worker(for_worker);
+        last_price = (Min + MaxPrice) / 2;
+    }
 
     public void Stop()
     {
         if(loop_worker != null)
+        {
             loop_worker.Stop();
             IsRunning = false;
+        }
     }
     
     public void Start()
     {
         if(loop_worker != null)
+        {
             loop_worker.Start();
             IsRunning = true;
+        }
     }
 }

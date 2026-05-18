@@ -7,7 +7,7 @@
 
     <MudItem xs="6">
 
-            <MudPaper Class="pa-4" Style="width:100%; height:550px; overflow:auto;">
+            <MudPaper Class="pa-4" Style="width:100%; height:600px; overflow:auto;">
                 <OrderInputFields when_create_order="handle_create_order"/>
                 <MudDivider Class="my-3" />
                 <AutoPlacer on_auto_create="handle_create_order"/>
@@ -17,7 +17,7 @@
 
     <MudItem xs="6">
         
-        <MudPaper Style="width:100%; height:550px; overflow:auto;">
+        <MudPaper Style="width:100%; height:600px; overflow:auto;">
             <Book book=@orderbook />
         </MudPaper>
 
@@ -55,6 +55,7 @@
         else if(i.Type == OrderType.Market)
         {
             orderbook.place_market_order(i.side,i.Quantity);
+            Console.WriteLine("Market order =>>>>>>>>>>>>");
         }
     }
 
