@@ -5,6 +5,8 @@ public class OrderBook
     public List<LimitOrder> ASKS { get; set; } = new List<LimitOrder>();
     public List<Tradelog> trade_log = new List<Tradelog>();
 
+    private AppDbContext dbc {get;set;}
+
     public event Action? trade_happened;
 
     public void place_limit_order(Side order_side, decimal quantity, decimal price)
@@ -23,6 +25,18 @@ public class OrderBook
             match_market_order_buy(new_market_order);
         else
             match_market_order_sell(new_market_order);
+    }
+
+    public void load_from_database() 
+    {
+        ASKS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.sell).ToList();
+        BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy).ToList();
+    }
+
+    public void safe_to_database(Order order)
+    {
+        dbc.Orders.Add(order);
+        dbc.SaveChangesAsync();
     }
 
     public void match_market_order_sell(MarketOrder order)
@@ -66,7 +80,7 @@ public class OrderBook
                 BIDS.RemoveAt(0);
         }
         if (order.status != Status.filled)
-            insert_ask(order);
+            insert_ask(order); safe_to_database(order);
     }
     public void match_limit_order_buy(LimitOrder order)
     {
@@ -81,7 +95,7 @@ public class OrderBook
                 ASKS.RemoveAt(0);
         }
         if (order.status != Status.filled)
-            insert_bid(order);
+            insert_bid(order); safe_to_database(order);
     }
 
     private void trade(Order o1, LimitOrder o2)
@@ -116,4 +130,10 @@ public class OrderBook
         }
         BIDS.Insert(i, order);
     }
+
+    public OrderBook(AppDbContext DbContext)
+    {
+        this.dbc = DbContext;
+    }
+
 }

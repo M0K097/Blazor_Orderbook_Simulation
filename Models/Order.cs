@@ -18,9 +18,9 @@ public abstract class Order
 {
     [Key]
     public int order_id { get; set;}
-    public Side order_side { get; }
-    public decimal quantity { get; }
-    public DateTime time { get; }
+    public Side order_side { get; set;}
+    public decimal quantity { get; set;}
+    public DateTime time { get; set;}
     public Status status { get; private set; }
     public decimal filled { get; private set; }
     public decimal remaining { get; private set; }

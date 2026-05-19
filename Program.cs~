@@ -1,10 +1,14 @@
 using ApexCharts;
 using MudBlazor.Services;
 using blazor_orderbook_simulation.Components;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseSqlite("Data Source=app.db"));
 builder.Services.AddMudServices();
 builder.Services.AddSingleton<OrderBook>();
 builder.Services.AddApexCharts();

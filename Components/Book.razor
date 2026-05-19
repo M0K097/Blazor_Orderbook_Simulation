@@ -19,7 +19,7 @@
 @code
 {
     [Parameter]
-    public OrderBook book {get;set;} = new();
+    public OrderBook book {get;set;} = null!; 
 
     private decimal last_execution_price {get;set;} = 0;
 }

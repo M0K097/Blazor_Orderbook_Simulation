@@ -16,8 +16,6 @@ public enum Status
 
 public abstract class Order
 {
-    public static int order_id_counter = 0;
-
     [Key]
     public int order_id { get; set;}
     public Side order_side { get; }
@@ -50,7 +48,6 @@ public abstract class Order
 
     public Order(Side side, decimal quantity)
     {
-        this.order_id = Order.order_id_counter++;
         this.order_side = side;
         this.quantity = quantity;
         this.time = DateTime.Now;

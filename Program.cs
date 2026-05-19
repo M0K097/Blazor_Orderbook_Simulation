@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlite("Data Source=app.db"));
 builder.Services.AddMudServices();
-builder.Services.AddSingleton<OrderBook>();
+builder.Services.AddScoped<OrderBook>();
 builder.Services.AddApexCharts();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
