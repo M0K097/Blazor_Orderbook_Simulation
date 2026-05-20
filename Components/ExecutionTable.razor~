@@ -1,7 +1,12 @@
 @if(executions is not null)
 {
 
-    <MudTable Items="@executions.TakeLast(50).Reverse()" Hover="true" Striped="true" Bordered="true">
+    <MudTable Items="LatestExecutions" Hover="true" Striped="true" Bordered="true" Filter="new Func<Tradelog,bool>(FilterFunc)">
+        <ToolBarContent>
+        <MudText Typo="Typo.h6">TradeLog</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
         <HeaderContent>
             <MudTh>ID</MudTh>
             <MudTh>TAKER</MudTh>
@@ -23,6 +28,27 @@
 {
     [Parameter]
     public List<Tradelog> executions {get;set;} = new List<Tradelog>();
+
+    private IEnumerable<Tradelog> LatestExecutions => (executions ?? Enumerable.Empty<Tradelog>()).Reverse();
+
+    private string searchString = "";
+
+    private bool FilterFunc(Tradelog log) => FilterFunc(log, searchString);
+    
+    private bool FilterFunc(Tradelog x, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+
+        var s = searchString.Trim();
+
+        return
+            x.log_id.ToString() == s ||
+            x.taker_id.ToString() == s ||
+            x.maker_id.ToString() == s ||
+            x.quantity.ToString() == s ||
+            x.execution_price.ToString() == s;
+    }
 }
 
 
