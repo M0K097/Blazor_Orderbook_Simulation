@@ -32,13 +32,19 @@ public class OrderBook
     public void load_book_from_database() 
     {
         ASKS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.sell && (o.status == Status.open || o.status == Status.partially_filled)).ToList();
-        BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy).ToList();
+        BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy && (o.status == Status.open || o.status == Status.partially_filled)).ToList();
     }
 
     public void safe_order_to_database(Order order)
     {
         dbc.Orders.Add(order);
-        dbc.SaveChangesAsync();
+        dbc.SaveChanges();
+    }
+
+    public void safe_trade_to_database(Tradelog trade)
+    {
+        dbc.TradeLogs.Add(trade);
+        dbc.SaveChanges();
     }
 
     public void match_market_order_sell(MarketOrder order)

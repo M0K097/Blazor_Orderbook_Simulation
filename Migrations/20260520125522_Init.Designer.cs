@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace blazor_orderbook_simulation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260520095643_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260520125522_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,9 +63,6 @@ namespace blazor_orderbook_simulation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Makerorder_id")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("execution_price")
                         .HasColumnType("TEXT");
 
@@ -83,7 +80,7 @@ namespace blazor_orderbook_simulation.Migrations
 
                     b.HasKey("log_id");
 
-                    b.HasIndex("Makerorder_id");
+                    b.HasIndex("maker_id");
 
                     b.HasIndex("taker_id");
 
@@ -111,8 +108,8 @@ namespace blazor_orderbook_simulation.Migrations
                 {
                     b.HasOne("Order", "Maker")
                         .WithMany("MakerTrades")
-                        .HasForeignKey("Makerorder_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("maker_id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Order", "Taker")

@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Tradelog> TradeLogs => Set<Tradelog>();
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -23,6 +24,12 @@ public class AppDbContext : DbContext
             .HasOne(t => t.Taker)
             .WithMany(o => o.TakerTrades)
             .HasForeignKey(t => t.taker_id)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Tradelog>()
+            .HasOne(t => t.Maker)
+            .WithMany(o => o.MakerTrades)
+            .HasForeignKey(t => t.maker_id)
             .OnDelete(DeleteBehavior.Restrict);
 
     }

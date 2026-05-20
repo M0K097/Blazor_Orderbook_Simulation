@@ -38,7 +38,13 @@ public class OrderBook
     public void safe_order_to_database(Order order)
     {
         dbc.Orders.Add(order);
-        dbc.SaveChangesAsync();
+        dbc.SaveChanges();
+    }
+
+    public void safe_trade_to_database(Tradelog trade)
+    {
+        dbc.TradeLogs.Add(trade);
+        dbc.SaveChanges();
     }
 
     public void match_market_order_sell(MarketOrder order)
@@ -107,6 +113,7 @@ public class OrderBook
         o2.fill(qty);
         var log = new Tradelog(o1.order_id, o2.order_id, qty,o2.price);
         log.print();
+        safe_trade_to_database(log);
         trade_log.Add(log);
         trade_happened?.Invoke();
     }

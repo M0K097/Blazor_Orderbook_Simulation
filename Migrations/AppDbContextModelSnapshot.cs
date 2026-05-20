@@ -60,9 +60,6 @@ namespace blazor_orderbook_simulation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Makerorder_id")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("execution_price")
                         .HasColumnType("TEXT");
 
@@ -80,7 +77,7 @@ namespace blazor_orderbook_simulation.Migrations
 
                     b.HasKey("log_id");
 
-                    b.HasIndex("Makerorder_id");
+                    b.HasIndex("maker_id");
 
                     b.HasIndex("taker_id");
 
@@ -108,8 +105,8 @@ namespace blazor_orderbook_simulation.Migrations
                 {
                     b.HasOne("Order", "Maker")
                         .WithMany("MakerTrades")
-                        .HasForeignKey("Makerorder_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("maker_id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Order", "Taker")

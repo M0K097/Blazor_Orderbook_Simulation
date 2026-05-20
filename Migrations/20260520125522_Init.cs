@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace blazor_orderbook_simulation.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,18 +41,17 @@ namespace blazor_orderbook_simulation.Migrations
                     maker_id = table.Column<int>(type: "INTEGER", nullable: false),
                     quantity = table.Column<decimal>(type: "TEXT", nullable: false),
                     execution_price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    time = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Makerorder_id = table.Column<int>(type: "INTEGER", nullable: false)
+                    time = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TradeLogs", x => x.log_id);
                     table.ForeignKey(
-                        name: "FK_TradeLogs_Orders_Makerorder_id",
-                        column: x => x.Makerorder_id,
+                        name: "FK_TradeLogs_Orders_maker_id",
+                        column: x => x.maker_id,
                         principalTable: "Orders",
                         principalColumn: "order_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TradeLogs_Orders_taker_id",
                         column: x => x.taker_id,
@@ -62,9 +61,9 @@ namespace blazor_orderbook_simulation.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TradeLogs_Makerorder_id",
+                name: "IX_TradeLogs_maker_id",
                 table: "TradeLogs",
-                column: "Makerorder_id");
+                column: "maker_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TradeLogs_taker_id",
