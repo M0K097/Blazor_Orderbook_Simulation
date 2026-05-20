@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 
 public class OrderBook
 {
@@ -48,6 +49,21 @@ public class OrderBook
         dbc.TradeLogs.Add(trade);
         dbc.SaveChanges();
     }
+
+    public void reset_orderbook_data()
+    {
+        BIDS.Clear();
+        ASKS.Clear();
+        trade_log.Clear();
+    }
+
+    public void reset_database()
+    {
+        dbc.TradeLogs.RemoveRange(dbc.TradeLogs);
+        dbc.Orders.RemoveRange(dbc.Orders);
+        dbc.SaveChanges();
+    }
+
 
     public void match_market_order_sell(MarketOrder order)
     {

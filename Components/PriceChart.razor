@@ -34,6 +34,13 @@
             await chart.UpdateSeriesAsync();
     }
 
+    public async Task clean_chart()
+    {
+        Data.Clear();
+        if(chart is not null)
+            await chart.UpdateSeriesAsync();
+    }
+
     private async void zoomed() => await is_zoomed.InvokeAsync();
 
     private ApexCharts.ApexChartOptions<PriceData> options = new()

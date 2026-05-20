@@ -2,6 +2,7 @@
 @inherits LayoutComponentBase
 @inject OrderBook orderbook
 @rendermode InteractiveServer
+@inject IDialogService DialogService 
 
 <MudGrid>
 
@@ -18,6 +19,7 @@
     <MudItem xs="6">
         
         <MudPaper Style="width:100%; height:600px; overflow:auto;">
+            <MudButton OnClick="reset_system">RESET ORDERBOOK</MudButton>
             <Book book=@orderbook />
         </MudPaper>
 
@@ -42,12 +44,24 @@
     private PriceChart? pricechart;
     private AutoPlacer? auto_placer;
     private decimal last_execution_price {get;set;} = 0;
+    private bool _initialized = false;
 
-
-    protected override void OnInitialized() 
+    protected override async Task OnInitializedAsync() 
     {
         orderbook.trade_happened += update_graph;
         orderbook.load_book_from_database();
+        orderbook.load_trades_from_database();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_initialized) return;
+
+        _initialized = true;
+        foreach(var trade in orderbook.trade_log)
+        {
+            await pricechart!.add_datapoint(trade.execution_price, trade.time);
+        }
     }
 
     public void handle_create_order(OrderInput input)
@@ -75,6 +89,24 @@
         {
             var last_trade = orderbook.trade_log.Last();
             await pricechart!.add_datapoint(last_trade.execution_price,last_trade.time);
+        }
+    }
+
+    public async void reset_system()
+    {
+
+         bool? result = await DialogService.ShowMessageBoxAsync(
+            "Warning",
+            "Resetting can not be undone!",
+            yesText:"RESET!", cancelText:"Cancel");
+        var choose_reset = result == null ? false : true;
+        if(choose_reset)
+        {
+            orderbook.reset_orderbook_data();
+            orderbook.reset_database();
+            if(pricechart is not null)
+                
+            StateHasChanged();
         }
     }
 }
