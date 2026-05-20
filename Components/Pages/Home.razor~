@@ -55,13 +55,18 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (_initialized) return;
-
+        if (!firstRender || _initialized) return;
         _initialized = true;
-        foreach(var trade in orderbook.trade_log)
-        {
-            await pricechart!.add_datapoint(trade.execution_price, trade.time);
-        }
+
+        List<PriceData> data_points = orderbook.trade_log
+            .Select(t => new PriceData
+            {
+                Price = t.execution_price,
+                Time = t.time
+            })
+            .ToList();
+
+        await pricechart!.append_batch(data_points);
     }
 
     public void handle_create_order(OrderInput input)
@@ -99,13 +104,15 @@
             "Warning",
             "Resetting can not be undone!",
             yesText:"RESET!", cancelText:"Cancel");
-        var choose_reset = result == null ? false : true;
+         var choose_reset = result == null ? false : true;
+
         if(choose_reset)
         {
             orderbook.reset_orderbook_data();
             orderbook.reset_database();
             if(pricechart is not null)
-                
+                await pricechart.clean_chart();
+
             StateHasChanged();
         }
     }

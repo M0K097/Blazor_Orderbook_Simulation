@@ -1,0 +1,14 @@
+
+public class PriceData
+{
+    public decimal price {get;set;}
+    public DateTime time {get;set;}
+
+    public PriceData(){}
+
+    public PriceData(decimal price, DateTime time)
+    {
+        this.price = price;
+        this.time = time;
+    }
+}

@@ -34,10 +34,18 @@
             await chart.UpdateSeriesAsync();
     }
 
+    public async Task append_batch(List<PriceData> batch)
+    {
+        Data.AddRange(batch);
+        if(chart is not null)
+            await chart.UpdateSeriesAsync();
+    }
+
     public async Task clean_chart()
     {
         Data.Clear();
-        await chart.UpdateSeriesAsync();
+        if(chart is not null)
+            await chart.UpdateSeriesAsync();
     }
 
     private async void zoomed() => await is_zoomed.InvokeAsync();
@@ -80,15 +88,4 @@
     }
 };
 
-    public class PriceData
-    {
-        public decimal price {get;set;}
-        public DateTime time {get;set;}
-
-        public PriceData(decimal price, DateTime time)
-        {
-            this.price = price;
-            this.time = time;
-        }
-    }
 }

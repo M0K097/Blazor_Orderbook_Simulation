@@ -55,13 +55,18 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (_initialized) return;
-
+        if (!firstRender || _initialized) return;
         _initialized = true;
-        foreach(var trade in orderbook.trade_log)
-        {
-            await pricechart!.add_datapoint(trade.execution_price, trade.time);
-        }
+
+        List<PriceData> data_points = orderbook.trade_log
+            .Select(t => new PriceData
+            {
+                price = t.execution_price,
+                time = t.time
+            })
+            .ToList();
+
+        await pricechart!.append_batch(data_points);
     }
 
     public void handle_create_order(OrderInput input)
