@@ -11,7 +11,6 @@
 
         <ApexPointSeries TItem="PriceData"
                          Items="Data"
-                         Title="Time" 
                          Name="Price"
                          SeriesType="SeriesType.Line"
                          XValue="e => e.time"
@@ -51,7 +50,7 @@
         },
         Zoom = new Zoom
         {
-            Enabled = true
+            Enabled = false
         }
     },
 

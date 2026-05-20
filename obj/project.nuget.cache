@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "zcDXG8MrnI4=",
+  "dgSpecHash": "+yQZfEYCpMA=",
   "success": true,
   "projectFilePath": "/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/blazor_orderbook_simulation.csproj",
   "expectedPackageFiles": [
     "/home/m0k0/.nuget/packages/blazor-apexcharts/6.1.0/blazor-apexcharts.6.1.0.nupkg.sha512",
     "/home/m0k0/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
-    "/home/m0k0/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.7/microsoft.aspnetcore.app.internal.assets.10.0.7.nupkg.sha512",
+    "/home/m0k0/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.8/microsoft.aspnetcore.app.internal.assets.10.0.8.nupkg.sha512",
     "/home/m0k0/.nuget/packages/microsoft.build.framework/18.0.2/microsoft.build.framework.18.0.2.nupkg.sha512",
     "/home/m0k0/.nuget/packages/microsoft.codeanalysis.analyzers/3.11.0/microsoft.codeanalysis.analyzers.3.11.0.nupkg.sha512",
     "/home/m0k0/.nuget/packages/microsoft.codeanalysis.common/5.0.0/microsoft.codeanalysis.common.5.0.0.nupkg.sha512",

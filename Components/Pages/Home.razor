@@ -30,7 +30,7 @@
     </MudItem>
 
     <MudItem xs="12">
-        <MudPaper Class="pa-4" Style="width:100%;">
+        <MudPaper Class="pa-4" Style="width:100%; height:400px; overflow:auto;">
           <ExecutionTable executions="@orderbook.trade_log"/>
         </MudPaper>
     </MudItem>
@@ -47,7 +47,7 @@
     protected override void OnInitialized() 
     {
         orderbook.trade_happened += update_graph;
-        orderbook.load_from_database();
+        orderbook.load_book_from_database();
     }
 
     public void handle_create_order(OrderInput input)

@@ -1,7 +1,7 @@
 @if(executions is not null)
 {
 
-    <MudTable Items="@executions.Take(10)" Hover="true">
+    <MudTable Items="@executions.TakeLast(50).Reverse()" Hover="true" Striped="true" Bordered="true">
         <HeaderContent>
             <MudTh>ID</MudTh>
             <MudTh>TAKER</MudTh>

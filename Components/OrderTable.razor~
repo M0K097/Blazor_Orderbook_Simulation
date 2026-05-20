@@ -9,7 +9,9 @@
                     <th>ID</th>
                     <th>AMOUNT</th>
                     <th>PRICE</th>
-                    <th>FILL</th>
+                    <th>FILLED</th>
+                    <th>REMAINING</th>
+                    <th>STATUS</th>
                 </tr>
             </thead>
         }

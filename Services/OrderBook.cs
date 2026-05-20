@@ -12,6 +12,7 @@ public class OrderBook
     public void place_limit_order(Side order_side, decimal quantity, decimal price)
     {
         var new_limit_order = new LimitOrder(order_side, quantity, price);
+        safe_order_to_database(new_limit_order);
         if (new_limit_order.order_side == Side.buy)
             match_limit_order_buy(new_limit_order);
         else
@@ -21,19 +22,20 @@ public class OrderBook
     public void place_market_order(Side order_side, decimal quantity)
     {
         var new_market_order = new MarketOrder(order_side, quantity);
+        safe_order_to_database(new_market_order);
         if (new_market_order.order_side == Side.buy)
             match_market_order_buy(new_market_order);
         else
             match_market_order_sell(new_market_order);
     }
 
-    public void load_from_database() 
+    public void load_book_from_database() 
     {
-        ASKS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.sell).ToList();
-        BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy).ToList();
+        ASKS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.sell && (o.status == Status.open || o.status == Status.partially_filled)).ToList();
+        BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy && (o.status == Status.open || o.status == Status.partially_filled)).ToList();
     }
 
-    public void safe_to_database(Order order)
+    public void safe_order_to_database(Order order)
     {
         dbc.Orders.Add(order);
         dbc.SaveChangesAsync();
@@ -80,7 +82,7 @@ public class OrderBook
                 BIDS.RemoveAt(0);
         }
         if (order.status != Status.filled)
-            insert_ask(order); safe_to_database(order);
+            insert_ask(order); 
     }
     public void match_limit_order_buy(LimitOrder order)
     {
@@ -95,7 +97,7 @@ public class OrderBook
                 ASKS.RemoveAt(0);
         }
         if (order.status != Status.filled)
-            insert_bid(order); safe_to_database(order);
+            insert_bid(order); 
     }
 
     private void trade(Order o1, LimitOrder o2)

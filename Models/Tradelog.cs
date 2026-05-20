@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 public class Tradelog
 {
-    private static int log_id_counter = 0;
     [Key]
     public int log_id { get; set; }
     public int taker_id { get; set; }
@@ -12,8 +11,6 @@ public class Tradelog
     public DateTime time {get; set;}
     public Order Taker {get;set;} = null!;
     public Order Maker {get;set;} = null!;
-    public int market_id {get;set;}
-    public Market Market {get;set;} = null!;
 
     public void print()
     {
@@ -28,7 +25,6 @@ public class Tradelog
 
     public Tradelog(int new_order_id, int resting_order_id, decimal qty, decimal price)
     {
-        this.log_id = log_id_counter++;
         this.taker_id = new_order_id;
         this.maker_id = resting_order_id;
         this.quantity = qty;
