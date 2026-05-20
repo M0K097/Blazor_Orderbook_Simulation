@@ -48,6 +48,7 @@
     {
         orderbook.trade_happened += update_graph;
         orderbook.load_book_from_database();
+        orderbook.load_trades_from_database();
     }
 
     public void handle_create_order(OrderInput input)

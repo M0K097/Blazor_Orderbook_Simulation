@@ -35,6 +35,8 @@ public class OrderBook
         BIDS = dbc.Orders.OfType<LimitOrder>().Where(o => o.order_side == Side.buy && (o.status == Status.open || o.status == Status.partially_filled)).ToList();
     }
 
+    public void load_trades_from_database() => trade_log = dbc.TradeLogs.ToList();
+
     public void safe_order_to_database(Order order)
     {
         dbc.Orders.Add(order);
@@ -113,6 +115,7 @@ public class OrderBook
         o2.fill(qty);
         var log = new Tradelog(o1.order_id, o2.order_id, qty,o2.price);
         log.print();
+        safe_trade_to_database(log);
         trade_log.Add(log);
         trade_happened?.Invoke();
     }

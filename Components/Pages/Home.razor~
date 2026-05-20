@@ -47,7 +47,7 @@
     protected override void OnInitialized() 
     {
         orderbook.trade_happened += update_graph;
-        orderbook.load_from_database();
+        orderbook.load_book_from_database();
     }
 
     public void handle_create_order(OrderInput input)
