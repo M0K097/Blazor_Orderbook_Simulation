@@ -13,7 +13,7 @@
                 <MudToggleItem Value='"Price"'>PRICE</MudToggleItem>
             </MudToggleGroup>
 
-        <MudTextField @bind-Value="searchString" Placeholder=@_selected Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudTextField @bind-Value="searchString" Placeholder=@_selected Adornment="Adornment.Start" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </div>
 
         </ToolBarContent>

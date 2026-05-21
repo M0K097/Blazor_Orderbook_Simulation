@@ -46,6 +46,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Cb29rLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/CompleteOrderTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Db21wbGV0ZU9yZGVyVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/ExecutionTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9FeGVjdXRpb25UYWJsZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +64,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/OrderTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9PcmRlclRhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/Pages/ASKS.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BU0tTLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/Pages/BIDS.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9CSURTLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/m0k0/Desktop/Abschluss_Arbeit/blazor_orderbook_simulation/Components/Pages/Docs.razor]

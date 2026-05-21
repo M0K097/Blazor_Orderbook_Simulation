@@ -1,0 +1,75 @@
+@inject NavigationManager Nav
+
+@if(orders is not null)
+{
+    <MudTable T="LimitOrder" Items="orders" Hover="true" Striped="true" Bordered="true" Filter="new Func<LimitOrder,bool>(FilterFunc)">
+        <ToolBarContent>
+
+        <div class="d-flex align-center gap-4">
+            <MudToggleGroup @bind-Value="_selected" Outlined="true" Color="Color.Primary">
+                <MudToggleItem Value='"ID"'>ORDER ID</MudToggleItem>
+                <MudToggleItem Value='"QUANTITY"'>QUANTITY</MudToggleItem>
+                <MudToggleItem Value='"MAKER"'>TIME</MudToggleItem>
+                <MudToggleItem Value='"PRICE"'>PRICE</MudToggleItem>
+            </MudToggleGroup>
+
+        <MudTextField @bind-Value="searchString" Placeholder=@_selected Adornment="Adornment.Start" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </div>
+
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>ID</MudTh>
+            <MudTh>QUANTITY</MudTh>
+            <MudTh>TIME</MudTh>
+            <MudTh>STATUS</MudTh>
+            <MudTh>FILLED</MudTh>
+            <MudTh>REMAINING</MudTh>
+            <MudTh>PRICE</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="ID">@context.order_id</MudTd>
+            <MudTd DataLabel="QUANTITY">@context.quantity</MudTd>
+            <MudTd DataLabel="TIME">@context.time</MudTd>
+            <MudTd DataLabel="STATUS">@context.status</MudTd>
+            <MudTd DataLabel="FILLED">@context.filled</MudTd>
+            <MudTd DataLabel="REMAINING">@context.remaining</MudTd>
+            <MudTd DataLabel="PRICE">@context.price</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+    <MudButton OnClick=go_back>go back</MudButton>
+
+@code
+{
+    [Parameter]
+    public List<LimitOrder> orders {get;set;} = new List<LimitOrder>();
+
+    private string searchString = "";
+    private bool FilterFunc(LimitOrder order) => FilterFunc(order, searchString);
+
+    private string _selected = "ID";
+    
+    private bool FilterFunc(LimitOrder x, string searchString)
+    {
+          if (string.IsNullOrWhiteSpace(searchString))
+                return true;
+
+          var s = searchString.Trim();
+
+          if(_selected == "ID")      
+              return x.order_id.ToString().Contains(s);
+          else if (_selected == "QUANTITY")
+              return x.quantity.ToString().Contains(s); 
+          else if (_selected == "TIME")
+              return x.time.ToString().Contains(s); 
+          else if (_selected == "PRICE")
+              return x.price.ToString().Contains(s);
+          else 
+              return false;
+    }
+
+    public void go_back() => Nav.NavigateTo("/");
+        
+}
+
+

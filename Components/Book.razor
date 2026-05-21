@@ -1,4 +1,8 @@
+@inject NavigationManager Nav
 
+<MudStack Row="true">
+    <MudText Typo="Typo.h5">ASKS</MudText><MudButton OnClick="show_all_asks">show all</MudButton>
+</MudStack>
 <OrderTable orders="@book.ASKS.AsEnumerable().Reverse().ToList()" CssClass="table-light-red"/>
 
 @if(book.trade_log.Count > 0)
@@ -14,12 +18,18 @@
     last_execution_price = @book.trade_log.Last().execution_price;
 }
 
+<MudStack Row="true">
+    <MudText Typo="Typo.h5">BIDS</MudText><MudButton OnClick="show_all_bids">show all</MudButton>
+</MudStack>
 <OrderTable orders="@book.BIDS" show_head="false" CssClass="table-light-green"/>
 
-@code
-{
+@code {
     [Parameter]
     public OrderBook book {get;set;} = null!; 
 
     private decimal last_execution_price {get;set;} = 0;
+
+    public void show_all_bids() => Nav.NavigateTo("/BIDS");
+
+    public void show_all_asks() => Nav.NavigateTo("/ASKS");
 }

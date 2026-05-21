@@ -1,0 +1,11 @@
+@page "/BIDS"
+@inject OrderBook book;
+
+<CompleteOrderTable orders="bids"/>
+
+@code
+{
+    public List<LimitOrder> bids {get;set;} = new(); 
+
+    protected override void OnInitialized() => bids = book.BIDS;
+}
