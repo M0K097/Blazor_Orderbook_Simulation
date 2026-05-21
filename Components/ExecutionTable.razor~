@@ -3,9 +3,19 @@
 
     <MudTable Items="LatestExecutions" Hover="true" Striped="true" Bordered="true" Filter="new Func<Tradelog,bool>(FilterFunc)">
         <ToolBarContent>
-        <MudText Typo="Typo.h6">TradeLog</MudText>
-        <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+
+        <div class="d-flex align-center gap-4">
+            <MudToggleGroup @bind-Value="_selected" Outlined="true" Color="Color.Primary">
+                <MudToggleItem Value='"ID"'>TRADE ID</MudToggleItem>
+                <MudToggleItem Value='"TAKER"'>TAKER ID</MudToggleItem>
+                <MudToggleItem Value='"MAKER"'>MAKER ID</MudToggleItem>
+                <MudToggleItem Value='"Quantity"'>QUANTITY</MudToggleItem>
+                <MudToggleItem Value='"Price"'>PRICE</MudToggleItem>
+            </MudToggleGroup>
+
+        <MudTextField @bind-Value="searchString" Placeholder=@_selected Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </div>
+
         </ToolBarContent>
         <HeaderContent>
             <MudTh>ID</MudTh>
@@ -32,22 +42,29 @@
     private IEnumerable<Tradelog> LatestExecutions => (executions ?? Enumerable.Empty<Tradelog>()).Reverse();
 
     private string searchString = "";
-
     private bool FilterFunc(Tradelog log) => FilterFunc(log, searchString);
+
+    private string _selected = "ID";
     
     private bool FilterFunc(Tradelog x, string searchString)
     {
-        if (string.IsNullOrWhiteSpace(searchString))
-            return true;
+          if (string.IsNullOrWhiteSpace(searchString))
+                return true;
 
-        var s = searchString.Trim();
+          var s = searchString.Trim();
 
-        return
-            x.log_id.ToString() == s ||
-            x.taker_id.ToString() == s ||
-            x.maker_id.ToString() == s ||
-            x.quantity.ToString() == s ||
-            x.execution_price.ToString() == s;
+          if(_selected == "ID")      
+              return x.log_id.ToString().Contains(s);
+          else if(_selected == "TAKER")
+              return x.taker_id.ToString().Contains(s); 
+          else if (_selected == "MAKER")
+              return x.maker_id.ToString().Contains(s); 
+          else if (_selected == "Quantity")
+              return x.quantity.ToString().Contains(s); 
+          else if (_selected == "Price")
+              return x.execution_price.ToString().Contains(s);
+          else 
+              return false;
     }
 }
 
