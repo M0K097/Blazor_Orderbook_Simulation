@@ -28,8 +28,8 @@
             <MudTd DataLabel="ID">@context.log_id</MudTd>
             <MudTd DataLabel="TAKER">@context.taker_id</MudTd>
             <MudTd DataLabel="MAKER">@context.maker_id</MudTd>
-            <MudTd DataLabel="QUANTITY">@context.quantity</MudTd>
-            <MudTd DataLabel="PRICE">@context.execution_price</MudTd>
+            <MudTd DataLabel="QUANTITY">@context.quantity.ToString("0.00")</MudTd>
+            <MudTd DataLabel="PRICE">@context.execution_price.ToString("0.00")</MudTd>
         </RowTemplate>
     </MudTable>
 }

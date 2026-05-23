@@ -94,7 +94,7 @@
 
     private decimal generate_price()
     {
-        decimal price = last_price;
+        decimal price = Math.Round(last_price,2);
         var max_possible_variance = MaxPrice * (decimal)Variance;
         var applied_variance = (decimal)random.NextDouble() * max_possible_variance;
 
@@ -124,7 +124,7 @@
     {
         if(loop_worker is null) return;
         loop_worker.Stop();
-        await InvokeAsync(StateHasChanged);
+        InvokeAsync(StateHasChanged);
     }
     
     public void Start()
