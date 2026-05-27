@@ -2,9 +2,56 @@
 @inherits LayoutComponentBase
 @rendermode InteractiveServer
 
+<h3>A Blazor Server application that simulates the dynamics of a financial order book.</h3>
 
-            <p>   a Blazor-Server App that simulates the dynamics of an orderbook on the server
-    and renders them as a dynamic graph in the clients browser. </p>
+<h4>Parameters</h4>
+
+<div class="mb-4">
+    <strong>Speed</strong><br />
+    Defines the frequency, in milliseconds, at which new orders are generated and submitted to the order book.
+</div>
+
+<div class="mb-4">
+    <strong>Maximum Price</strong><br />
+    Specifies the highest possible price that an automatically generated order can have.
+</div>
+
+<div class="mb-4">
+    <strong>Maximum Amount</strong><br />
+    Specifies the maximum quantity that an automatically generated order can contain.
+</div>
+
+<div class="mb-4">
+    <strong>Optimism</strong><br />
+    This value ranges between <code>0</code> and <code>1</code> and represents the overall market sentiment of traders.
+    It determines the probability of a generated order being either a buy order or a sell order.
+
+    <ul>
+        <li>At an optimism value of <code>0.5</code>, buy and sell orders are generated with equal probability (50% each).</li>
+        <li>At a value of <code>1</code>, only buy orders are generated.</li>
+        <li>At a value of <code>0</code>, only sell orders are generated.</li>
+    </ul>
+</div>
+
+<div class="mb-4">
+    <strong>Variance</strong><br />
+    In real-world financial markets, orders are not placed completely randomly but rather around the current market price within a certain range.
+
+    <br /><br />
+
+    The variance parameter defines the maximum deviation from the current market price.
+    For example, a variance value of <code>0.1</code> allows newly generated orders to deviate by up to <code>10%</code> from the current market price.
+</div>
+
+<div class="mb-4">
+    <strong>Liquidity</strong><br />
+    This value ranges between <code>0</code> and <code>1</code> and defines the probability of an order being created as either a limit order or a market order.
+
+    <ul>
+        <li>A liquidity value of <code>1</code> results in exclusively limit orders being generated.</li>
+        <li>Lower liquidity values increase the likelihood of market orders being placed.</li>
+    </ul>
+</div>
 
 
 
