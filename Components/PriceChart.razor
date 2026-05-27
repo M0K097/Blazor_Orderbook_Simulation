@@ -1,22 +1,22 @@
 @rendermode InteractiveServer
 @using ApexCharts
 
-    <ApexChart TItem="PriceData"
-               Title="Price" 
-               options="options"
-               OnZoomed="zoomed"
-               @ref="chart"
-               Width="@("100%")"
-               Height="500" >
+<ApexChart TItem="PriceData"
+            Title="Price"
+            options="options"
+            OnZoomed="zoomed"
+            @ref="chart"
+            Width="@("100%")"
+            Height="500" >
 
-        <ApexPointSeries TItem="PriceData"
-                         Items="Data"
-                         Name="Price"
-                         SeriesType="SeriesType.Line"
-                         XValue="e => e.time"
-                         YValue="e => Math.Round(e.price,2)" />
+    <ApexPointSeries TItem="PriceData"
+                        Items="Data"
+                        Name="Price"
+                        SeriesType="SeriesType.Line"
+                        XValue="e => e.time"
+                        YValue="e => Math.Round(e.price,2)" />
 
-    </ApexChart>
+</ApexChart>
     
 @code {
     
@@ -52,40 +52,40 @@
 
     private ApexCharts.ApexChartOptions<PriceData> options = new()
     {
-    Chart = new ApexCharts.Chart
-    {
-        Animations = new ApexCharts.Animations
+        Chart = new ApexCharts.Chart
         {
-            Enabled = false
+            Animations = new ApexCharts.Animations
+            {
+                Enabled = false
+            },
+            Toolbar = new ApexCharts.Toolbar
+            {
+                Show = true
+            },
+            Zoom = new Zoom
+            {
+                Enabled = true
+            }
         },
-        Toolbar = new ApexCharts.Toolbar
+
+        Xaxis = new ApexCharts.XAxis
         {
-            Show = true
+            Type = ApexCharts.XAxisType.Datetime,
+            TickAmount = 6,
+            Labels = new ApexCharts.XAxisLabels
+            {
+                HideOverlappingLabels = true,
+                DatetimeFormatter = new ApexCharts.DatetimeFormatter
+                {
+                    Hour = "HH:mm"
+                }
+            }
         },
-        Zoom = new Zoom
+
+        Tooltip = new ApexCharts.Tooltip
         {
             Enabled = true
         }
-    },
-
-    Xaxis = new ApexCharts.XAxis
-    {
-        Type = ApexCharts.XAxisType.Datetime,
-        TickAmount = 6,
-        Labels = new ApexCharts.XAxisLabels
-        {
-            HideOverlappingLabels = true,
-            DatetimeFormatter = new ApexCharts.DatetimeFormatter
-            {
-                Hour = "HH:mm"
-            }
-        }
-    },
-
-    Tooltip = new ApexCharts.Tooltip
-    {
-        Enabled = true
-    }
-};
+    };
 
 }
