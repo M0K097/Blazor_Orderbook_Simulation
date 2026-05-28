@@ -1,0 +1,12 @@
+services:
+  orderbook:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - orderbook-db:/app/data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+volumes:
+  orderbook-db:
